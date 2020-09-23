@@ -15,14 +15,14 @@ import java.util.Base64;
 public class HashService {
     private Logger logger = LoggerFactory.getLogger(HashService.class);
 
-    public String getHashedValue(String data, String salt) {
+    public String getHashedValue(String data,String salt){
         byte[] hashedValue = null;
 
         KeySpec spec = new PBEKeySpec(data.toCharArray(), salt.getBytes(), 5000, 128);
-        try {
+        try{
             SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
             hashedValue = factory.generateSecret(spec).getEncoded();
-        } catch (InvalidKeySpecException | NoSuchAlgorithmException e) {
+        } catch(InvalidKeySpecException | NoSuchAlgorithmException e){
             logger.error(e.getMessage());
         }
 
