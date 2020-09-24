@@ -12,9 +12,9 @@ public interface NoteMapper {
     @Select("SELECT * FROM NOTES")
     List<Note> getNotes();
 
-    @Select("SELECT * FROM NOTES WHERE noteid=#{nodeId}")
+    @Select("SELECT * FROM NOTES WHERE noteid=#{noteId}")
     Note getNoteById(Integer noteId);
 
-    @Insert("INSERT INTO NOTES(notetitle,notedescription,userid) VALUES(#{nodeTitle},#{noteDescription},#{userId})")
-    Integer createNote(String noteTitle,String noteDescription,Integer userId);
+    @Insert("INSERT INTO NOTES(notetitle,notedescription,userid) VALUES(#{noteTitle},#{noteDescription},#{userId})")
+    Integer createNote(Note note);
 }
