@@ -1,5 +1,5 @@
 <div class="tab-pane show" id="nav-notes" role="tabpanel" aria-labelledby="nav-notes-tab">
-    <button style="margin: 0.25em;" type="button" class="btn btn-info float-right" onclick="showNoteModal()">
+    <button style="margin: 0.25em;" type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#note-modal">
         + Add a New Note
     </button>
 
@@ -15,7 +15,7 @@
             <tbody>
             <tr th:each="note : ${noteList}">
                 <td>
-                    <button type="button" class="btn btn-success">Edit</button>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#note-modal" th:id="'note-button-'+${note.noteId}" th:attr="data-note-id=${note.noteId},data-note-title=${note.noteTitle},data-note-description=${note.noteDescription}">Edit</button>
                     <a class="btn btn-danger">Delete</a>
                 </td>
                 <th scope="row" th:text="${note.noteTitle}">Example Note Title </th>
@@ -25,7 +25,7 @@
         </table>
     </div>
 
-    <div class="modal fade" id="noteModal" tabindex="-1" role="dialog" aria-labelledby="noteModalLabel" aria-hidden="true">
+    <div class="modal fade" id="note-modal" tabindex="-1" role="dialog" aria-labelledby="noteModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -61,11 +61,17 @@
     <script th:src="@{/js/bootstrap.min.js}"></script>
 
     <script type="text/javascript">
-            function showNoteModal(noteId, noteTitle, noteDescription) {
-                $('#note-id').val(noteId ? noteId : '');
-                $('#note-title').val(noteTitle ? noteTitle : '');
-                $('#note-description').val(noteDescription ? noteDescription : '');
-                $('#noteModal').modal('show');
-            }
-        </script>
+        $('#note-modal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget)
+            var noteId = button.data('note-id')
+            var noteTitle = button.data('note-title')
+            var noteDescription = button.data('note-description')
+
+            var modal = $(this)
+            $('#note-id').val(noteId ? noteId : '');
+            $('#note-title').val(noteTitle ? noteTitle : '');
+            $('#note-description').val(noteDescription ? noteDescription : '');
+        })
+
+    </script>
 </div>
