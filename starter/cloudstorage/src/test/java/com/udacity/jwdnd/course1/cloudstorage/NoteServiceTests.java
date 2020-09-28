@@ -30,4 +30,20 @@ public class NoteServiceTests{
         assertNotNull(noteID);
 //        assertEquals(note.getNoteTitle(),noteService.getNoteById(noteID).getNoteTitle());
     }
+
+    @Test
+    public void testNoteServiceUpdateNote(){
+        Note note = new Note(null,"Test Note","This is a note created by a Test",1);
+
+        Integer noteId = noteService.createNote(note);
+
+        Note noteUpdate = new Note(noteId,"Test Note (updated)","This is a note created by a Test, and this been updated",1);
+
+        Note noteAfterUpdate = noteService.updateNote(noteUpdate);
+
+        assertEquals(noteUpdate.getNoteTitle(),noteAfterUpdate.getNoteTitle());
+        assertEquals(noteUpdate.getNoteDescription(),noteAfterUpdate.getNoteDescription());
+        assertEquals(noteUpdate.getUserId(),noteAfterUpdate.getUserId());
+    }
+
 }

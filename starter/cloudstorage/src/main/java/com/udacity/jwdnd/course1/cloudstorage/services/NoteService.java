@@ -25,4 +25,14 @@ public class NoteService {
     public Integer createNote(Note note){
         return noteMapper.createNote(note);
     }
+
+    public Note updateNote(Note note) {
+        Integer numUpdatedRecord = noteMapper.updateNote(note);
+
+        if(numUpdatedRecord == 1) {
+            return noteMapper.getNoteById(note.getNoteId());
+        }
+
+        return null;
+    }
 }

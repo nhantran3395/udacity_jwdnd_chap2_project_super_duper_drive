@@ -4,7 +4,9 @@ import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 import com.udacity.jwdnd.course1.cloudstorage.services.NoteService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
 
@@ -18,10 +20,8 @@ public class HomeController {
     }
 
     @GetMapping
-    public String getHomePage(Model model){
-        model.addAttribute("isFilesActive",true);
-        model.addAttribute("isNotesActive",false);
-        model.addAttribute("isCredentialsActive",false);
+    public String getHomePage(@RequestParam(required = false) String activeTab, Model model){
+        model.addAttribute("activeTab",activeTab == null? "files":activeTab);
 
         return "home";
     }
@@ -43,15 +43,19 @@ public class HomeController {
             return "_" + "credentials";
     }
 
-    @PostMapping("notes")
-    public String createItem(@ModelAttribute("newNote") Note note, Model model){
+    @PostMapping("notes/add")
+    public ModelAndView createNote(@ModelAttribute("newNote") Note note, ModelMap model){
         noteService.createNote(note);
-        model.addAttribute("noteList",noteService.getNotes());
+        model.addAttribute("activeTab","notes");
 
-        model.addAttribute("isFilesActive",false);
-        model.addAttribute("isNotesActive",true);
-        model.addAttribute("isCredentialsActive",false);
+        return new ModelAndView ("redirect:/",model) ;
+    }
 
-        return "home";
+    @PostMapping("notes/update/{id}")
+    public ModelAndView updateNote(@PathVariable("id") long id, @ModelAttribute("newNote") Note note, ModelMap model){
+        noteService.updateNote(note);
+        model.addAttribute("activeTab","notes");
+
+        return new ModelAndView ("redirect:/",model) ;
     }
 }

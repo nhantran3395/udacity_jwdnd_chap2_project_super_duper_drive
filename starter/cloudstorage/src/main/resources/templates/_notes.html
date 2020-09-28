@@ -35,7 +35,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" method="POST" th:action="@{/notes}" th:object="${newNote}">
+                    <form action="#" method="POST" th:action="@{/notes/add}" th:object="${newNote}" id="note-modal-form">
                         <input type="hidden" name="noteId" id="note-id">
                         <div class="form-group">
                             <label for="note-title" class="col-form-label">Title</label>
@@ -67,10 +67,10 @@
             var noteTitle = button.data('note-title')
             var noteDescription = button.data('note-description')
 
-            var modal = $(this)
             $('#note-id').val(noteId ? noteId : '');
             $('#note-title').val(noteTitle ? noteTitle : '');
             $('#note-description').val(noteDescription ? noteDescription : '');
+            $('#note-modal-form').attr("action",noteId? `notes/update/${noteId}` : `notes/add`)
         })
 
     </script>

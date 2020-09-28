@@ -20,9 +20,9 @@
             <div class="row">
                 <div class="col">
                     <ul class="nav nav-tabs mt-5" id="nav-tab">
-                        <li class="nav-item"><a href="#files" data-url="/files" class="nav-link" th:classappend="${isFilesActive}? active : not-active">Files</a></li>
-                        <li class="nav-item"><a href="#notes" data-url="/notes" class="nav-link" th:classappend="${isNotesActive}? active : not-active">Notes</a></li>
-                        <li class="nav-item"><a href="#credentials" data-url="/credentials" class="nav-link" th:classappend="${isCredentialsActive}? active : not-active">Credentials</a></li>
+                        <li class="nav-item"><a href="#files" data-url="/files" class="nav-link" th:classappend="${activeTab} == 'files'? active : not-active">Files</a></li>
+                        <li class="nav-item"><a href="#notes" data-url="/notes" class="nav-link" th:classappend="${activeTab} == 'notes'? active : not-active">Notes</a></li>
+                        <li class="nav-item"><a href="#credentials" data-url="/credentials" class="nav-link" th:classappend="${activeTab} == 'credentials'? active : not-active">Credentials</a></li>
                     </ul>
 
                     <div class="tab-content pt-3">
