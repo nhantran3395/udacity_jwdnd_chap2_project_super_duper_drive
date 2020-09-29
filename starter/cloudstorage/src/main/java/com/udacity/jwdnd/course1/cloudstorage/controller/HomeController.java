@@ -1,5 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.controller;
 
+import com.udacity.jwdnd.course1.cloudstorage.model.Credential;
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 import com.udacity.jwdnd.course1.cloudstorage.services.CredentialService;
 import com.udacity.jwdnd.course1.cloudstorage.services.NoteService;
@@ -8,8 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Arrays;
 
 @Controller
 @RequestMapping({"/","/home"})
@@ -66,9 +65,17 @@ public class HomeController {
     }
 
     @GetMapping("credentials")
-    public String getCredentialsTab(Model model){
+    public String getCredentialsTab(@ModelAttribute("newCredential") Credential credential,Model model){
         model.addAttribute("credentialList",credentialService.getCredentials());
 
         return "_" + "credentials";
+    }
+
+    @PostMapping("credentials/add")
+    public ModelAndView createCredential(@ModelAttribute("newCredential") Credential credential, ModelMap model){
+        credentialService.createCredential(credential);
+        model.addAttribute("activeTab","credentials");
+
+        return new ModelAndView ("redirect:/",model) ;
     }
 }
