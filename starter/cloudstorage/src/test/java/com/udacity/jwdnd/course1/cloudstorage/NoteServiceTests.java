@@ -46,4 +46,19 @@ public class NoteServiceTests{
         assertEquals(noteUpdate.getUserId(),noteAfterUpdate.getUserId());
     }
 
+    @Test
+    public void testNoteServiceDeleteNote(){
+        Note note = new Note(null,"Test Note","This is a note created by a Test",1);
+
+        Integer noteId = noteService.createNote(note);
+
+        assertNotNull(noteId);
+
+        noteService.deleteNote(noteId);
+
+        Note noteAfterDelete = noteService.getNoteById(noteId);
+
+        assertNull(noteAfterDelete);
+    }
+
 }

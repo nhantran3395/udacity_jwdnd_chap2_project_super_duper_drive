@@ -58,4 +58,12 @@ public class HomeController {
 
         return new ModelAndView ("redirect:/",model) ;
     }
+
+    @GetMapping("notes/delete/{id}")
+    public ModelAndView deleteNote(@PathVariable("id") Integer id,ModelMap model){
+        noteService.deleteNote(id);
+        model.addAttribute("activeTab","notes");
+
+        return new ModelAndView ("redirect:/",model) ;
+    }
 }
