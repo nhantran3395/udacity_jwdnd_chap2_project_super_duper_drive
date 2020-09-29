@@ -35,7 +35,12 @@ CREATE TABLE IF NOT EXISTS CREDENTIALS (
     foreign key (userid) references USERS(userid)
 );
 
-INSERT INTO USERS (username,salt,password,firstname,lastname) VALUES ('thanhnhan3395','uCv7NPENHAnRoGXX/zrg2g==','hehYFfMnU2ywA7xNibCAQw==','Nhan','Thanh Tran');
+INSERT INTO USERS (username,salt,password,firstname,lastname) VALUES
+('thanhnhan3395','uCv7NPENHAnRoGXX/zrg2g==','hehYFfMnU2ywA7xNibCAQw==','Nhan','Thanh Tran');
+
 INSERT INTO NOTES (notetitle,notedescription,userid) VALUES
 ('Example Note Title','Example Note Description',1),
 ('Meeting at 10AM','Attend the internal meeting at 10AM. This is an online meeting',1);
+
+INSERT INTO CREDENTIALS (url,username,key,password,userid) VALUES
+('https://brse-sharing.nhanthanhtran.com/','nhanthanhtran030395@gmail.com','Snt4vrMionVN9jnxjlarHw==','vr53olHCL/Nv9c8IgqOuvYan2mQCQW4wk7+JyX6mHzE=',1);
