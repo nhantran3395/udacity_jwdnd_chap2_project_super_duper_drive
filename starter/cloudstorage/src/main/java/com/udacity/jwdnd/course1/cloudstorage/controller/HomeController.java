@@ -22,8 +22,9 @@ public class HomeController {
     }
 
     @GetMapping
-    public String getHomePage(@RequestParam(required = false) String activeTab, Model model){
+    public String getHomePage(@RequestParam(required = false) String activeTab, @RequestParam(required = false) boolean isViewingCredential, @RequestParam(required = false) Integer credentialId, Model model){
         model.addAttribute("activeTab",activeTab == null? "files":activeTab);
+        model.addAttribute("isViewingCredential",isViewingCredential? true : false);
 
         return "home";
     }
@@ -71,10 +72,27 @@ public class HomeController {
         return "_" + "credentials";
     }
 
+    @GetMapping("credentials/{id}")
+    public String getCredentialsTabWithCredentialBeingView(@PathVariable("id") Integer id, @ModelAttribute("newCredential") Credential credential, Model model){
+        model.addAttribute("credentialList",credentialService.getCredentials());
+        model.addAttribute("decryptedPasswordOfCredentialBeingViewed",credentialService.getDecryptedPasswordOfCredential(id));
+
+        return "_" + "credentials";
+    }
+
     @PostMapping("credentials/add")
     public ModelAndView createCredential(@ModelAttribute("newCredential") Credential credential, ModelMap model){
         credentialService.createCredential(credential);
         model.addAttribute("activeTab","credentials");
+
+        return new ModelAndView ("redirect:/",model) ;
+    }
+
+    @GetMapping("credentials/getDecryptedPassword/{id}")
+    public ModelAndView getDecryptedPassword(@PathVariable("id") Integer id,@ModelAttribute("newCredential") Credential credential,ModelMap model){
+        model.addAttribute("activeTab","credentials");
+        model.addAttribute("isViewingCredential",true);
+        model.addAttribute("credentialId",id);
 
         return new ModelAndView ("redirect:/",model) ;
     }

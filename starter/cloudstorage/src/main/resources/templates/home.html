@@ -52,9 +52,18 @@
             });
         });
 
-        // load first tab content
-        $('#files').load($('.nav-link.active').attr("data-url"), function (result) {
-        });
+        const urlParams = new URLSearchParams(window.location.search)
+        const credentialId = urlParams.get('credentialId')
+
+        if(credentialId){
+            $('#files').load(`${$('.nav-link.active').attr("data-url")}/${credentialId}`, function (result) {
+            });
+        }
+        else{
+            $('#files').load($('.nav-link.active').attr("data-url"), function (result) {
+            });
+        }
+
     </script>
 
 </body>

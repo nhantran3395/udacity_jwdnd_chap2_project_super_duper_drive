@@ -34,4 +34,10 @@ public class CredentialService {
     public Credential getCredentialByid(Integer credentialId){
         return credentialMapper.getCredentialById(credentialId);
     }
+
+    public String getDecryptedPasswordOfCredential(Integer credentialId){
+        Credential credential = credentialMapper.getCredentialById(credentialId);
+
+        return encryptionService.decryptValue(credential.getPassword(),credential.getKey());
+    }
 }
