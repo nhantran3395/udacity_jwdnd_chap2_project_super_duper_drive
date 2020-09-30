@@ -104,4 +104,12 @@ public class HomeController {
 
         return new ModelAndView ("redirect:/",model) ;
     }
+
+    @GetMapping("credentials/delete/{id}")
+    public ModelAndView deleteCredential(@PathVariable("id") Integer id,ModelMap model){
+        credentialService.deleteCredential(id);
+        model.addAttribute("activeTab","credentials");
+
+        return new ModelAndView ("redirect:/",model) ;
+    }
 }

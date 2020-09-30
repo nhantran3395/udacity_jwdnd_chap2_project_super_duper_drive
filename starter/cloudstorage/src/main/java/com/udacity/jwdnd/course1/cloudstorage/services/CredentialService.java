@@ -54,4 +54,8 @@ public class CredentialService {
 
         return null;
     }
+
+    public void deleteCredential(Integer credentialId){
+        credentialMapper.deleteCredential(credentialId);
+    }
 }
