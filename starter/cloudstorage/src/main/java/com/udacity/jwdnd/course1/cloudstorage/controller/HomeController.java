@@ -96,4 +96,12 @@ public class HomeController {
 
         return new ModelAndView ("redirect:/",model) ;
     }
+
+    @PostMapping("credentials/update/{id}")
+    public ModelAndView updateCredential(@PathVariable("id") Integer id, @ModelAttribute("newCredential") Credential credential, ModelMap model){
+        credentialService.updateCredential(credential);
+        model.addAttribute("activeTab","credentials");
+
+        return new ModelAndView ("redirect:/",model) ;
+    }
 }

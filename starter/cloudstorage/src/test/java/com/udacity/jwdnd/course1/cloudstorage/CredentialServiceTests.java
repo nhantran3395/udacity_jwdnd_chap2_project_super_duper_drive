@@ -34,4 +34,22 @@ public class CredentialServiceTests {
         assertEquals(credential.getUsername(),credentialAfterCreate.getUsername());
         assertEquals(credential.getPassword(),encryptionService.decryptValue(credentialAfterCreate.getPassword(),credentialAfterCreate.getKey()));
     }
+
+    @Test
+    public void testCredentialServiceUpdateCredential(){
+        Credential credential = new Credential(null,"https://brse-sharing.nhanthanhtran.com/","nhanthanhtran030395@gmail.com",null,"demoUserPassword#012",1);
+
+        Integer credentialId = credentialService.createCredential(credential);
+
+        assertNotNull(credentialId);
+
+        Credential credentialAfterCreate = credentialService.getCredentialByid(credentialId);
+
+        Credential credentialUpdate = new Credential(credentialId,"https://test.com/","testuser@test.com",credentialAfterCreate.getKey(),"testPassword",1);
+
+        Credential credentialAfterUpdate = credentialService.updateCredential(credentialUpdate);
+
+        assertNotNull(credentialAfterUpdate);
+    }
+
 }
