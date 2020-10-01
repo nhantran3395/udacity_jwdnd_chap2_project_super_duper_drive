@@ -29,11 +29,6 @@ public class HomeController {
         return "home";
     }
 
-    @GetMapping("files")
-    public String getFilesTab(){
-            return "_" + "files";
-    }
-
     @GetMapping("notes")
     public String getNotesTab(@ModelAttribute("newNote") Note note, Model model){
         model.addAttribute("noteList",noteService.getNotes());
