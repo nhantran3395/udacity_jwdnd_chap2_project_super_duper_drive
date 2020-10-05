@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
@@ -29,14 +28,13 @@ public class FileUploadController {
     @GetMapping
     public String listUploadFiles(Model model) throws IOException{
         model.addAttribute("files", storageService.loadAll().map(
-                path -> MvcUriComponentsBuilder.fromMethodName(FileUploadController.class,
-                        "serveFile", path.getFileName().toString()).build().toUri().toString())
+                path->path)
                 .collect(Collectors.toList()));
 
         return "_"+"files";
     }
 
-    @GetMapping("/files/{filename:.+}")
+    @GetMapping("/{filename:.+}")
     @ResponseBody
     public ResponseEntity<Resource> serveFile(@PathVariable String filename) {
 

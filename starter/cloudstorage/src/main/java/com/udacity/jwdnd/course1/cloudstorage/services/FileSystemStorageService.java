@@ -3,6 +3,8 @@ package com.udacity.jwdnd.course1.cloudstorage.services;
 import com.udacity.jwdnd.course1.cloudstorage.config.StorageProperties;
 import com.udacity.jwdnd.course1.cloudstorage.exception.StorageException;
 import com.udacity.jwdnd.course1.cloudstorage.exception.StorageFileNotFoundException;
+import com.udacity.jwdnd.course1.cloudstorage.mapper.FileMapper;
+import com.udacity.jwdnd.course1.cloudstorage.model.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -23,10 +25,12 @@ import java.util.stream.Stream;
 @Service
 public class FileSystemStorageService implements StorageService{
     private final Path rootLocation;
+    private FileMapper fileMapper;
 
     @Autowired
-    public FileSystemStorageService(StorageProperties properties) {
+    public FileSystemStorageService(StorageProperties properties, FileMapper fileMapper) {
         this.rootLocation = Paths.get(properties.getLocation());
+        this.fileMapper = fileMapper;
     }
 
     @Override
@@ -45,6 +49,7 @@ public class FileSystemStorageService implements StorageService{
             try (InputStream inputStream = file.getInputStream()) {
                 Files.copy(inputStream, this.rootLocation.resolve(filename),
                         StandardCopyOption.REPLACE_EXISTING);
+                fileMapper.createFile(new File(null,filename,"text","1kb",1));
             }
         }
         catch (IOException e) {

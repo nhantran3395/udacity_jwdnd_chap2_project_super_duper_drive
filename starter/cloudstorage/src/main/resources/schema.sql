@@ -16,12 +16,12 @@ CREATE TABLE IF NOT EXISTS NOTES (
 );
 
 CREATE TABLE IF NOT EXISTS FILES (
-    fileId INT PRIMARY KEY auto_increment,
+    fileid INT PRIMARY KEY auto_increment,
     filename VARCHAR,
     contenttype VARCHAR,
     filesize VARCHAR,
     userid INT,
-    filedata BLOB,
+--    filedata BLOB,
     foreign key (userid) references USERS(userid)
 );
 
@@ -44,3 +44,6 @@ INSERT INTO NOTES (notetitle,notedescription,userid) VALUES
 
 INSERT INTO CREDENTIALS (url,username,key,password,userid) VALUES
 ('https://brse-sharing.nhanthanhtran.com/','nhanthanhtran030395@gmail.com','Snt4vrMionVN9jnxjlarHw==','vr53olHCL/Nv9c8IgqOuvYan2mQCQW4wk7+JyX6mHzE=',1);
+
+INSERT INTO FILES (filename,contenttype,filesize,userid) VALUES
+('example.txt','text','1kb',1)

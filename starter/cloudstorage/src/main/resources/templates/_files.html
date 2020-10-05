@@ -25,10 +25,10 @@
             <tbody>
             <tr th:each="file:${files}">
                 <td>
-                    <a target="_blank" class="btn btn-success">View</a>
+                    <a class="btn btn-success" th:href="@{'files/'+${file}}">View</a>
                     <a  class="btn btn-danger">Delete</a>
                 </td>
-                <th scope="row" th:text="${files}">ExampleFile.txt</th>
+                <th scope="row" th:text="${file}">ExampleFile.txt</th>
             </tr>
             </tbody>
         </table>
