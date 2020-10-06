@@ -15,7 +15,6 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -50,9 +49,11 @@ public class FileSystemStorageService implements StorageService{
                                 + filename);
             }
             try (InputStream inputStream = file.getInputStream()) {
-                Files.copy(inputStream, this.rootLocation.resolve(filename),
+                Path path = this.rootLocation.resolve(filename);
+
+                Files.copy(inputStream, path,
                         StandardCopyOption.REPLACE_EXISTING);
-                fileMapper.createFile(new FileUpload(null,filename,this.getFileExtension(filename),"1kb",1));
+                fileMapper.createFile(new FileUpload(null,filename,this.getFileExtension(filename),this.getFileSize(path),1));
             }
         }
         catch (IOException e) {
@@ -125,7 +126,11 @@ public class FileSystemStorageService implements StorageService{
         return FilenameUtils.getExtension(filename);
     }
 
-    private String getFileSize(File file){
-        return FileUtils.byteCountToDisplaySize(FileUtils.sizeOf(file));
+    private String getFileSize(Path path) {
+        try{
+            return FileUtils.byteCountToDisplaySize(Files.size(path));
+        }catch(IOException e){
+            throw new StorageException("Failed to get file size ",e);
+        }
     }
 }
