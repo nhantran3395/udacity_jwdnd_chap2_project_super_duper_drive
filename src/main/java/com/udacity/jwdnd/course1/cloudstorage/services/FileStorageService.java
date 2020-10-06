@@ -25,12 +25,12 @@ import java.nio.file.StandardCopyOption;
 import java.util.stream.Stream;
 
 @Service
-public class FileSystemStorageService implements StorageService{
+public class FileStorageService implements StorageService{
     private final Path rootLocation;
     private FileMapper fileMapper;
 
     @Autowired
-    public FileSystemStorageService(StorageProperties properties, FileMapper fileMapper) {
+    public FileStorageService(StorageProperties properties, FileMapper fileMapper) {
         this.rootLocation = Paths.get(properties.getLocation());
         this.fileMapper = fileMapper;
     }
