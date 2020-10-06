@@ -33,4 +33,4 @@ target/
 .DS_Store
 
 ### file upload folder ###
-upload_dir
+upload-dir
