@@ -4,7 +4,9 @@ import com.udacity.jwdnd.course1.cloudstorage.config.StorageProperties;
 import com.udacity.jwdnd.course1.cloudstorage.exception.StorageException;
 import com.udacity.jwdnd.course1.cloudstorage.exception.StorageFileNotFoundException;
 import com.udacity.jwdnd.course1.cloudstorage.mapper.FileMapper;
-import com.udacity.jwdnd.course1.cloudstorage.model.File;
+import com.udacity.jwdnd.course1.cloudstorage.model.FileUpload;
+import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -13,6 +15,7 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -49,7 +52,7 @@ public class FileSystemStorageService implements StorageService{
             try (InputStream inputStream = file.getInputStream()) {
                 Files.copy(inputStream, this.rootLocation.resolve(filename),
                         StandardCopyOption.REPLACE_EXISTING);
-                fileMapper.createFile(new File(null,filename,"text","1kb",1));
+                fileMapper.createFile(new FileUpload(null,filename,this.getFileExtension(filename),"1kb",1));
             }
         }
         catch (IOException e) {
@@ -116,5 +119,13 @@ public class FileSystemStorageService implements StorageService{
         catch (IOException e) {
             throw new StorageException("Could not initialize storage", e);
         }
+    }
+
+    private String getFileExtension(String filename){
+        return FilenameUtils.getExtension(filename);
+    }
+
+    private String getFileSize(File file){
+        return FileUtils.byteCountToDisplaySize(FileUtils.sizeOf(file));
     }
 }
