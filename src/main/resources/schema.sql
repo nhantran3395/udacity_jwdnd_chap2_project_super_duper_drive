@@ -36,14 +36,19 @@ CREATE TABLE IF NOT EXISTS CREDENTIALS (
 );
 
 INSERT INTO USERS (username,salt,password,firstname,lastname) VALUES
-('thanhnhan3395','uCv7NPENHAnRoGXX/zrg2g==','hehYFfMnU2ywA7xNibCAQw==','Nhan','Thanh Tran');
+('thanhnhan3395','uCv7NPENHAnRoGXX/zrg2g==','hehYFfMnU2ywA7xNibCAQw==','Nhan','Thanh Tran'),
+('loganfox4273','KGkGXL+GseEyjrw98dMjMA==','sk5gXLBP39jaquU0POA6Mg==','Logan','Fox'),
+('geraldaustin111','wHJ1sSBxGiz9JnMXnBmOAg==','3vQ3YKj1p0h+ywPOfQv0xw==','Gerald','Austin'),
+('marcianichols4792','Kuvrpw05GlT67cmkVKNmjg==','G/XMZiczSJos0ivGNLbMzQ==','Marcia','Nichols');
 
 INSERT INTO NOTES (notetitle,notedescription,userid) VALUES
-('Example Note Title','Example Note Description',1),
-('Meeting at 10AM','Attend the internal meeting at 10AM. This is an online meeting',1);
+('Example Note','Hello, thank you for visiting this page. This is a short example of a note that you can store.',1),
+('Example Note','Hello, thank you for visiting this page. This is a short example of a note that you can store.',2),
+('Example Note','Hello, thank you for visiting this page. This is a short example of a note that you can store.',3),
+('Example Note','Hello, thank you for visiting this page. This is a short example of a note that you can store.',4);
 
 INSERT INTO CREDENTIALS (url,username,key,password,userid) VALUES
-('https://brse-sharing.nhanthanhtran.com/','nhanthanhtran030395@gmail.com','Snt4vrMionVN9jnxjlarHw==','vr53olHCL/Nv9c8IgqOuvYan2mQCQW4wk7+JyX6mHzE=',1);
-
-INSERT INTO FILES (filename,contenttype,filesize,userid) VALUES
-('example.txt','text','1kb',1)
+('https://brse-sharing.nhanthanhtran.com/','nhanthanhtran030395@gmail.com','Snt4vrMionVN9jnxjlarHw==','vr53olHCL/Nv9c8IgqOuvYan2mQCQW4wk7+JyX6mHzE=',1),
+('https://randomuser.me/','logan.fox@example.com','sL/Nc71kdYxLzi5B4gXsnQ==','6PVo/g8XY/47oxdCdLWANQ==',2),
+('https://randomuser.me/','gerald.austin@example.com','h0gFGPZJ/WckzPSIG+aXoA==','qlGwiL/dwWXcsesoZ+RaBA==',3),
+('https://randomuser.me/','marcia.nichols@example.com','syEQvvZpDGb5GuELLztNrA==','FYBUy1fzR1/ehPfu2G8/bg==',4);

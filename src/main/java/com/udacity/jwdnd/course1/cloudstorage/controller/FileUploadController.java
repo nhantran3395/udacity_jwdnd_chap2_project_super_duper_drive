@@ -1,10 +1,12 @@
 package com.udacity.jwdnd.course1.cloudstorage.controller;
 
 import com.udacity.jwdnd.course1.cloudstorage.services.StorageService;
+import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,10 +20,12 @@ import java.util.stream.Collectors;
 @RequestMapping("/files")
 public class FileUploadController {
 
+    private UserService userService;
     private final StorageService storageService;
 
     @Autowired
-    public FileUploadController(StorageService storageService){
+    public FileUploadController(StorageService storageService, UserService userService){
+        this.userService = userService;
         this.storageService = storageService;
     }
 
@@ -50,8 +54,8 @@ public class FileUploadController {
     }
 
     @PostMapping("/add")
-    public String handleFileUpload(@RequestParam("fileUpload") MultipartFile file, RedirectAttributes redirectAttributes){
-        storageService.store(file);
+    public String handleFileUpload(@RequestParam("fileUpload") MultipartFile file, RedirectAttributes redirectAttributes, Authentication authentication){
+        storageService.store(file,userService.getUser(authentication.getName()).getUserId());
         redirectAttributes.addFlashAttribute("message",
                 "You successfully uploaded " + file.getOriginalFilename() + "!");
 

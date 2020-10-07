@@ -36,7 +36,7 @@ public class FileStorageService implements StorageService{
     }
 
     @Override
-    public void store(MultipartFile file) {
+    public void store(MultipartFile file, Integer userId) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         try {
             if (file.isEmpty()) {
@@ -53,7 +53,7 @@ public class FileStorageService implements StorageService{
 
                 Files.copy(inputStream, path,
                         StandardCopyOption.REPLACE_EXISTING);
-                fileMapper.createFile(new FileUpload(null,filename,this.getFileExtension(filename),this.getFileSize(path),1));
+                fileMapper.createFile(new FileUpload(null,filename,this.getFileExtension(filename),this.getFileSize(path),userId));
             }
         }
         catch (IOException e) {

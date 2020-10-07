@@ -2,6 +2,7 @@ package com.udacity.jwdnd.course1.cloudstorage.services;
 
 import com.udacity.jwdnd.course1.cloudstorage.mapper.NoteMapper;
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,6 +19,7 @@ public class NoteService {
     public List<Note> getNotes(){
         return noteMapper.getNotes();
     }
+
     public Note getNoteById(Integer noteId){
         return noteMapper.getNoteById(noteId);
     }
