@@ -12,9 +12,11 @@
     <body class="p-3 mb-2 bg-light text-black">
         <div class="container">
             <div id="logoutDiv">
-                <form action="#" method="POST">
+                <form method="POST" th:action="@{/logout}">
                     <button type="submit" class="btn btn-secondary float-right">Logout</button>
                 </form>
+
+                <span th:text="'Hi, ' + ${loggedInUsername}" class="float-right"></span>
             </div>
 
             <div class="row">
