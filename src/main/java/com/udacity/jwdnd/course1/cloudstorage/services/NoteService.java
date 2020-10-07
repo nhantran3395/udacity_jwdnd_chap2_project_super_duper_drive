@@ -20,6 +20,8 @@ public class NoteService {
         return noteMapper.getNotes();
     }
 
+    public List<Note> getNotesByUserid(Integer userId) {return noteMapper.getNotesByUserId(userId);}
+
     public Note getNoteById(Integer noteId){
         return noteMapper.getNoteById(noteId);
     }

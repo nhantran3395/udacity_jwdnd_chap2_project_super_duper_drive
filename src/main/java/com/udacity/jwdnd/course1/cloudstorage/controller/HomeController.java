@@ -35,8 +35,8 @@ public class HomeController {
     }
 
     @GetMapping("notes")
-    public String getNotesTab(@ModelAttribute("newNote") Note note, Model model){
-        model.addAttribute("noteList",noteService.getNotes());
+    public String getNotesTab(@ModelAttribute("newNote") Note note, Model model, Authentication authentication){
+        model.addAttribute("noteList",noteService.getNotesByUserid(userService.getUser(authentication.getName()).getUserId()));
 
         return "_" + "notes";
     }
@@ -67,8 +67,8 @@ public class HomeController {
     }
 
     @GetMapping("credentials")
-    public String getCredentialsTab(@ModelAttribute("newCredential") Credential credential,Model model){
-        model.addAttribute("credentialList",credentialService.getCredentials());
+    public String getCredentialsTab(@ModelAttribute("newCredential") Credential credential,Model model, Authentication authentication){
+        model.addAttribute("credentialList",credentialService.getCredentialsByUserId(userService.getUser(authentication.getName()).getUserId()));
 
         return "_" + "credentials";
     }

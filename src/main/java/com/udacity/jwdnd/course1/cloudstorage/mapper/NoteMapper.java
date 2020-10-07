@@ -10,6 +10,9 @@ public interface NoteMapper {
     @Select("SELECT * FROM NOTES")
     List<Note> getNotes();
 
+    @Select("SELECT * FROM NOTES WHERE userid=#{userId}")
+    List<Note> getNotesByUserId(Integer userId);
+
     @Select("SELECT * FROM NOTES WHERE noteid=#{noteId}")
     Note getNoteById(Integer noteId);
 

@@ -2,23 +2,35 @@ package com.udacity.jwdnd.course1.cloudstorage;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 import com.udacity.jwdnd.course1.cloudstorage.services.NoteService;
+import com.udacity.jwdnd.course1.cloudstorage.services.StorageService;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoProperties;
 import org.springframework.context.annotation.Import;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @MybatisTest
 @Import(NoteService.class)
+
 public class NoteServiceTests{
+    @Autowired
+    private StorageService storageService;
 
     @Autowired
     private NoteService noteService;
 
     @Test
-    public void testNoteServiceGetNotes(){
-        noteService.getNotes();
+    public void testNoteServiceGetNotesByUserId(){
+
+        List<Note> notes = noteService.getNotesByUserid(1);
+
+        for (Note note : notes){
+            System.out.println(note.getNoteTitle());
+        }
     }
 
     @Test
