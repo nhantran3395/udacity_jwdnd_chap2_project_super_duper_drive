@@ -15,6 +15,7 @@ import org.springframework.util.FileSystemUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.PostConstruct;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -22,17 +23,25 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 @Service
 public class FileStorageService implements StorageService{
     private final Path rootLocation;
     private FileMapper fileMapper;
+    private Stream<Path> filesBelongToUser;
 
     @Autowired
     public FileStorageService(StorageProperties properties, FileMapper fileMapper) {
         this.rootLocation = Paths.get(properties.getLocation());
         this.fileMapper = fileMapper;
+    }
+
+    @PostConstruct
+    public void setUpFilesBelongToUser(){
+        this.filesBelongToUser = Stream.empty();
     }
 
     @Override
@@ -71,7 +80,26 @@ public class FileStorageService implements StorageService{
         catch (IOException e) {
             throw new StorageException("Failed to read stored files", e);
         }
+    }
 
+    @Override
+    public Stream<Path> loadByUserId(Integer userId){
+            List<String> listOfFilenameBelongToUser = new ArrayList<String>();
+            fileMapper.getFilesByUserId(userId).forEach(file ->
+                {
+                    listOfFilenameBelongToUser.add(file.getFileName());
+                }
+             );
+
+            filesBelongToUser = Stream.empty();
+
+            listOfFilenameBelongToUser.forEach(filename->
+                {
+                    filesBelongToUser = Stream.concat(filesBelongToUser,Stream.of(load(filename)));
+                }
+            );
+
+            return filesBelongToUser.map(this.rootLocation::relativize);
     }
 
     @Override

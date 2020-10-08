@@ -30,8 +30,8 @@ public class FileUploadController {
     }
 
     @GetMapping
-    public String listUploadFiles(Model model) throws IOException{
-        model.addAttribute("files", storageService.loadAll().map(
+    public String listUploadFiles(Model model, Authentication authentication) throws IOException{
+        model.addAttribute("files", storageService.loadByUserId(userService.getUser(authentication.getName()).getUserId()).map(
                 path->path)
                 .collect(Collectors.toList()));
 

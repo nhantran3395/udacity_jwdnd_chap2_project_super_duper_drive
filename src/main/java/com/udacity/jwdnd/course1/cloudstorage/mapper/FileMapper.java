@@ -11,8 +11,13 @@ import java.util.List;
 public interface FileMapper {
     @Select("SELECT * FROM FILES")
     List<FileUpload> getFiles();
+
+    @Select("SELECT * FROM FILES WHERE userid=#{userId}")
+    List<FileUpload> getFilesByUserId(Integer userId);
+
     @Select("SELECT * FROM FILES WHERE fileid=#{fileId}")
     FileUpload getFileById(Integer fileId);
+
     @Insert("INSERT INTO FILES(filename,contenttype,filesize,userid) VALUES (#{fileName},#{contentType},#{fileSize},#{userId})")
     Integer createFile(FileUpload file);
 }
