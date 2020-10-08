@@ -1,7 +1,16 @@
 <div class="tab-pane show" id="nav-notes" role="tabpanel" aria-labelledby="nav-notes-tab">
-    <button style="margin: 0.25em;" type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#note-modal">
-        + Add a New Note
-    </button>
+    <div>
+        <div class="alert alert-success alert-dismissible float-left fade" role="alert" id="note-alert">
+            <span>Great! A new note has been successfully added!</span>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+
+        <button style="margin: 0.25em;" type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#note-modal">
+            + Add a New Note
+        </button>
+    </div>
 
     <div class="table-responsive">
         <table class="table table-striped" id="userTable">
@@ -104,6 +113,19 @@
             $('#note-delete-link').attr("href",`notes/delete/${noteId}`)
         })
 
+        if(!urlParams){
+            const urlParams = new URLSearchParams(window.location.search)
+        }
+
+        if(typeof noteCreateSuccess === 'undefined'){
+            const noteCreateSuccess = urlParams.get('noteCreateSuccess')
+        }
+
+        noteCreateSuccess = urlParams.get('noteCreateSuccess')
+
+        if(noteCreateSuccess){
+            $('#note-alert').addClass('show')
+        }
 
     </script>
 </div>

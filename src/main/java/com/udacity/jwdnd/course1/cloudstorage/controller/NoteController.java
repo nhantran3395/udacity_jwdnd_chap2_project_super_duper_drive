@@ -22,7 +22,7 @@ public class NoteController {
     }
 
     @GetMapping
-    public String getNotesTab(@ModelAttribute("newNote") Note note, Model model, Authentication authentication){
+    public String getNotesTab(@ModelAttribute("newNote") Note note,Model model, Authentication authentication){
         model.addAttribute("noteList",noteService.getNotesByUserid(userService.getUser(authentication.getName()).getUserId()));
 
         return "_" + "notes";
@@ -33,6 +33,7 @@ public class NoteController {
         note.setUserId(userService.getUser(authentication.getName()).getUserId());
         noteService.createNote(note);
         model.addAttribute("activeTab","notes");
+        model.addAttribute("noteCreateSuccess","true");
 
         return new ModelAndView ("redirect:/",model) ;
     }
