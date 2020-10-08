@@ -51,10 +51,12 @@
             // ajax load from data-url
             $(href).load(url, function (result) {
                 pane.tab('show');
-            });
+            })
+
+            window.history.replaceState({}, document.title, "/")
         });
 
-        const urlParams = new URLSearchParams(window.location.search)
+        var urlParams = new URLSearchParams(window.location.search)
         const credentialId = urlParams.get('credentialId')
 
         if(credentialId){

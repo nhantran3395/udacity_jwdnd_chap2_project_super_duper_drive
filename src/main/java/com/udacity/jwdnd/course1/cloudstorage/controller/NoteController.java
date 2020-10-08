@@ -33,7 +33,7 @@ public class NoteController {
         note.setUserId(userService.getUser(authentication.getName()).getUserId());
         noteService.createNote(note);
         model.addAttribute("activeTab","notes");
-        model.addAttribute("noteCreateSuccess","true");
+        model.addAttribute("isNoteCreateSucceeded","true");
 
         return new ModelAndView ("redirect:/",model) ;
     }

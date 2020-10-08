@@ -114,16 +114,18 @@
         })
 
         if(!urlParams){
-            const urlParams = new URLSearchParams(window.location.search)
+            var urlParams = new URLSearchParams(window.location.search)
+        }else{
+            urlParams = new URLSearchParams(window.location.search)
         }
 
-        if(typeof noteCreateSuccess === 'undefined'){
-            const noteCreateSuccess = urlParams.get('noteCreateSuccess')
+        if(typeof isNoteCreateSucceeded === 'undefined'){
+            var isNoteCreateSucceeded = urlParams.get('isNoteCreateSucceeded')
         }
 
-        noteCreateSuccess = urlParams.get('noteCreateSuccess')
+        isNoteCreateSucceeded = urlParams.get('isNoteCreateSucceeded')
 
-        if(noteCreateSuccess){
+        if(isNoteCreateSucceeded){
             $('#note-alert').addClass('show')
         }
 
