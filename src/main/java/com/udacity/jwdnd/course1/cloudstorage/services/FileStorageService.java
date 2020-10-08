@@ -135,6 +135,7 @@ public class FileStorageService implements StorageService{
     public void delete(String filename) {
         try{
             FileSystemUtils.deleteRecursively(this.load(filename));
+            fileMapper.deleteFile(filename);
         }catch(IOException e){
             throw new StorageException("Failed to delete file " + filename, e);
         }
