@@ -33,7 +33,10 @@ public class NoteController {
         note.setUserId(userService.getUser(authentication.getName()).getUserId());
         noteService.createNote(note);
         model.addAttribute("activeTab","notes");
-        model.addAttribute("isNoteCreateSucceeded","true");
+        model.addAttribute("isAlertToBeOpened","true");
+        model.addAttribute("alertType","success");
+        model.addAttribute("alertForResource","note");
+        model.addAttribute("alertContent","create");
 
         return new ModelAndView ("redirect:/",model) ;
     }
@@ -43,6 +46,10 @@ public class NoteController {
         note.setUserId(userService.getUser(authentication.getName()).getUserId());
         noteService.updateNote(note);
         model.addAttribute("activeTab","notes");
+        model.addAttribute("isAlertToBeOpened","true");
+        model.addAttribute("alertType","success");
+        model.addAttribute("alertForResource","note");
+        model.addAttribute("alertContent","update");
 
         return new ModelAndView ("redirect:/",model) ;
     }
@@ -51,6 +58,11 @@ public class NoteController {
     public ModelAndView deleteNote(@PathVariable("id") Integer id,ModelMap model){
         noteService.deleteNote(id);
         model.addAttribute("activeTab","notes");
+        model.addAttribute("activeTab","notes");
+        model.addAttribute("isAlertToBeOpened","true");
+        model.addAttribute("alertType","success");
+        model.addAttribute("alertForResource","note");
+        model.addAttribute("alertContent","delete");
 
         return new ModelAndView ("redirect:/",model) ;
     }

@@ -1,7 +1,7 @@
 <div class="tab-pane show" id="nav-notes" role="tabpanel" aria-labelledby="nav-notes-tab">
     <div>
         <div class="alert alert-success alert-dismissible float-left fade" role="alert" id="note-alert">
-            <span>Great! A new note has been successfully added!</span>
+            <span id="note-alert-message">Great! A new note has been successfully added!</span>
             <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="note-alert-close-button">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -119,19 +119,40 @@
             urlParams = new URLSearchParams(window.location.search)
         }
 
-        if(typeof isNoteCreateSucceeded === 'undefined'){
-            var isNoteCreateSucceeded = urlParams.get('isNoteCreateSucceeded')
-        }
+        isAlertToBeOpened = urlParams.get('isAlertToBeOpened')
+        alertType = urlParams.get('alertType')
+        alertForResource = urlParams.get('alertForResource')
+        alertContent = urlParams.get('alertContent')
 
-        isNoteCreateSucceeded = urlParams.get('isNoteCreateSucceeded')
-
-        const closeAlert = () => {
+        const closeNoteAlert = () => {
             $('#note-alert-close-button').click()
         }
 
-        if(isNoteCreateSucceeded){
-            $('#note-alert').addClass('show')
-            setTimeout(closeAlert,1000)
+        if(isAlertToBeOpened){
+            if(alertForResource==='note'){
+                if(alertType==='success'){
+                    let messageText = ''
+
+                    switch(alertContent){
+                        case 'create':
+                            messageText = 'Great! A new note has been successfully added!'
+                            break
+                        case 'update':
+                            messageText = 'Cool! The update has been saved successfully'
+                            break
+                        case 'delete':
+                            messageText = 'The note you selected has been removed'
+                            break
+                        default:
+                            messageText = 'Success'
+                    }
+
+                    $('#note-alert-message').text(messageText)
+                }
+
+                $('#note-alert').addClass('show')
+                setTimeout(closeNoteAlert,1500)
+            }
         }
 
     </script>

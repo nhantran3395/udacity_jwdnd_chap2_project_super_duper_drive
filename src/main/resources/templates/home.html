@@ -57,7 +57,12 @@
         });
 
         var urlParams = new URLSearchParams(window.location.search)
-        const credentialId = urlParams.get('credentialId')
+        var credentialId = urlParams.get('credentialId')
+
+        var isAlertToBeOpened = urlParams.get('isAlertToBeOpened')
+        var alertType = urlParams.get('alertType')
+        var alertForResource = urlParams.get('alertForResource')
+        var alertContent = urlParams.get('alertContent')
 
         if(credentialId){
             $('#files').load(`${$('.nav-link.active').attr("data-url")}/${credentialId}`, function (result) {
