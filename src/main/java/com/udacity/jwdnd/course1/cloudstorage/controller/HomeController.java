@@ -26,11 +26,10 @@ public class HomeController {
     }
 
     @GetMapping
-    public String getHomePage(@RequestParam(required = false) String activeTab, @RequestParam(required = false) boolean isViewingCredential, @RequestParam(required = false) Integer credentialId, @RequestParam(required = false) boolean isNoteCreateSucceeded,Model model, Authentication authentication){
+    public String getHomePage(@RequestParam(required = false) String activeTab, @RequestParam(required = false) boolean isViewingCredential, @RequestParam(required = false) Integer credentialId,Model model, Authentication authentication){
         model.addAttribute("activeTab",activeTab == null? "files":activeTab);
         model.addAttribute("isViewingCredential",isViewingCredential? true : false);
         model.addAttribute("loggedInUsername",userService.getUser(authentication.getName()).getUsername());
-        model.addAttribute("isNoteCreateSucceeded",isNoteCreateSucceeded);
 
         return "home";
     }
