@@ -2,7 +2,7 @@
     <div>
         <div class="alert alert-success alert-dismissible float-left fade" role="alert" id="note-alert">
             <span>Great! A new note has been successfully added!</span>
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="note-alert-close-button">
                 <span aria-hidden="true">&times;</span>
             </button>
         </div>
@@ -125,8 +125,13 @@
 
         isNoteCreateSucceeded = urlParams.get('isNoteCreateSucceeded')
 
+        const closeAlert = () => {
+            $('#note-alert-close-button').click()
+        }
+
         if(isNoteCreateSucceeded){
             $('#note-alert').addClass('show')
+            setTimeout(closeAlert,1000)
         }
 
     </script>
