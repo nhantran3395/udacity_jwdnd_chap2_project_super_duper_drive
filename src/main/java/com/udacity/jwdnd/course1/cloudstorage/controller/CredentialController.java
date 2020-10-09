@@ -41,6 +41,10 @@ public class CredentialController {
         credential.setUserId(userService.getUser(authentication.getName()).getUserId());
         credentialService.createCredential(credential);
         model.addAttribute("activeTab","credentials");
+        model.addAttribute("isAlertToBeOpened","true");
+        model.addAttribute("alertType","success");
+        model.addAttribute("alertForResource","credential");
+        model.addAttribute("alertContent","create");
 
         return new ModelAndView ("redirect:/",model) ;
     }
@@ -59,6 +63,10 @@ public class CredentialController {
         credential.setUserId(userService.getUser(authentication.getName()).getUserId());
         credentialService.updateCredential(credential);
         model.addAttribute("activeTab","credentials");
+        model.addAttribute("isAlertToBeOpened","true");
+        model.addAttribute("alertType","success");
+        model.addAttribute("alertForResource","credential");
+        model.addAttribute("alertContent","update");
 
         return new ModelAndView ("redirect:/",model) ;
     }
@@ -67,6 +75,10 @@ public class CredentialController {
     public ModelAndView deleteCredential(@PathVariable("id") Integer id,ModelMap model){
         credentialService.deleteCredential(id);
         model.addAttribute("activeTab","credentials");
+        model.addAttribute("isAlertToBeOpened","true");
+        model.addAttribute("alertType","success");
+        model.addAttribute("alertForResource","credential");
+        model.addAttribute("alertContent","delete");
 
         return new ModelAndView ("redirect:/",model) ;
     }
