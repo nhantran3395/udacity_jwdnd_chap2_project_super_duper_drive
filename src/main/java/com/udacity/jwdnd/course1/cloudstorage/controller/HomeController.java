@@ -16,13 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping({"/","/home"})
 public class HomeController {
     private UserService userService;
-    private NoteService noteService;
-    private CredentialService credentialService;
 
     public HomeController(UserService userService, NoteService noteService, CredentialService credentialService){
         this.userService = userService;
-        this.noteService = noteService;
-        this.credentialService = credentialService;
     }
 
     @GetMapping
