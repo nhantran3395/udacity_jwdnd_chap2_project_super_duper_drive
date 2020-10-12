@@ -9,8 +9,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
@@ -48,17 +50,27 @@ public class FileUploadController {
     }
 
     @GetMapping("/delete/{filename:.+}")
-    public String deleteFile (@PathVariable String filename){
+    public ModelAndView deleteFile (@PathVariable String filename,ModelMap model){
         storageService.delete(filename);
-        return  "redirect:/";
-    }
+
+        model.addAttribute("activeTab","files");
+        model.addAttribute("isAlertToBeOpened","true");
+        model.addAttribute("alertType","success");
+        model.addAttribute("alertForResource","file");
+        model.addAttribute("alertContent","delete");
+
+        return new ModelAndView ("redirect:/",model) ;    }
 
     @PostMapping("/add")
-    public String handleFileUpload(@RequestParam("fileUpload") MultipartFile file, RedirectAttributes redirectAttributes, Authentication authentication){
+    public ModelAndView handleFileUpload(@RequestParam("fileUpload") MultipartFile file, Authentication authentication, ModelMap model){
         storageService.store(file,userService.getUser(authentication.getName()).getUserId());
-        redirectAttributes.addFlashAttribute("message",
-                "You successfully uploaded " + file.getOriginalFilename() + "!");
 
-        return  "redirect:/";
+        model.addAttribute("activeTab","files");
+        model.addAttribute("isAlertToBeOpened","true");
+        model.addAttribute("alertType","success");
+        model.addAttribute("alertForResource","file");
+        model.addAttribute("alertContent","create");
+
+        return new ModelAndView ("redirect:/",model) ;
     }
 }
