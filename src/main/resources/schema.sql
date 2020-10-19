@@ -9,7 +9,7 @@ CREATE TABLE IF NOT EXISTS USERS (
 
 CREATE TABLE IF NOT EXISTS NOTES (
     noteid INT PRIMARY KEY auto_increment,
-    notetitle VARCHAR(20),
+    notetitle VARCHAR(50),
     notedescription VARCHAR(1000),
     userid INT,
     foreign key (userid) references USERS(userid)
@@ -42,10 +42,10 @@ INSERT INTO USERS (username,salt,password,firstname,lastname) VALUES
 ('marcianichols4792','Kuvrpw05GlT67cmkVKNmjg==','G/XMZiczSJos0ivGNLbMzQ==','Marcia','Nichols');
 
 INSERT INTO NOTES (notetitle,notedescription,userid) VALUES
-('Example Note','Hello, thank you for visiting this page. This is a short example of a note that you can store.',1),
-('Example Note','Hello, thank you for visiting this page. This is a short example of a note that you can store.',2),
-('Example Note','Hello, thank you for visiting this page. This is a short example of a note that you can store.',3),
-('Example Note','Hello, thank you for visiting this page. This is a short example of a note that you can store.',4);
+('Example Note for Nhan','Hello Nhan, thank you for visiting this page. This is a short example of a note that you can store.',1),
+('Example Note for Logan','Hello Logan, thank you for visiting this page. This is a short example of a note that you can store.',2),
+('Example Note for Gerald','Hello Gerald, thank you for visiting this page. This is a short example of a note that you can store.',3),
+('Example Note for Marcia','Hello Marcia, thank you for visiting this page. This is a short example of a note that you can store.',4);
 
 INSERT INTO CREDENTIALS (url,username,key,password,userid) VALUES
 ('https://brse-sharing.nhanthanhtran.com/','nhanthanhtran030395@gmail.com','Snt4vrMionVN9jnxjlarHw==','vr53olHCL/Nv9c8IgqOuvYan2mQCQW4wk7+JyX6mHzE=',1),
