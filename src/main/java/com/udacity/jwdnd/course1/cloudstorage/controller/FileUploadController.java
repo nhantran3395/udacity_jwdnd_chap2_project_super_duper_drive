@@ -22,14 +22,11 @@ import java.util.stream.Collectors;
 @RequestMapping("/files")
 public class FileUploadController {
 
+    @Autowired
     private UserService userService;
-    private final StorageService storageService;
 
     @Autowired
-    public FileUploadController(StorageService storageService, UserService userService){
-        this.userService = userService;
-        this.storageService = storageService;
-    }
+    private StorageService storageService;
 
     @GetMapping
     public String listUploadFiles(Model model, Authentication authentication) throws IOException{
@@ -37,7 +34,7 @@ public class FileUploadController {
                 path->path)
                 .collect(Collectors.toList()));
 
-        return "_"+"files";
+        return "files/files";
     }
 
     @GetMapping("/{filename:.+}")
@@ -50,27 +47,16 @@ public class FileUploadController {
     }
 
     @GetMapping("/delete/{filename:.+}")
-    public ModelAndView deleteFile (@PathVariable String filename,ModelMap model){
+    public ModelAndView deleteFile (@PathVariable String filename){
         storageService.delete(filename);
 
-        model.addAttribute("activeTab","files");
-        model.addAttribute("isAlertToBeOpened","true");
-        model.addAttribute("alertType","success");
-        model.addAttribute("alertForResource","file");
-        model.addAttribute("alertContent","delete");
-
-        return new ModelAndView ("redirect:/",model) ;    }
+        return new ModelAndView ("redirect:/files") ;
+    }
 
     @PostMapping("/add")
-    public ModelAndView handleFileUpload(@RequestParam("fileUpload") MultipartFile file, Authentication authentication, ModelMap model){
+    public ModelAndView handleFileUpload(@RequestParam("fileUpload") MultipartFile file, Authentication authentication){
         storageService.store(file,userService.getUser(authentication.getName()).getUserId());
 
-        model.addAttribute("activeTab","files");
-        model.addAttribute("isAlertToBeOpened","true");
-        model.addAttribute("alertType","success");
-        model.addAttribute("alertForResource","file");
-        model.addAttribute("alertContent","create");
-
-        return new ModelAndView ("redirect:/",model) ;
+        return new ModelAndView ("redirect:/files") ;
     }
 }
