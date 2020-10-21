@@ -1,127 +1,254 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layout}">
-<head>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
+  <head>
     <title>Store notes</title>
-</head>
-<body>
-
-<div layout:fragment="content">
-    <section>
+  </head>
+  <body>
+    <div layout:fragment="content">
+      <section>
         <div id="alert-container">
-            <!-- create note successful alert -->
-            <div class="alert alert-success alert-dismissible float-left fade" role="alert" id="alert-success-note-create">
-                <span id="alert-message-success-note-create">Great! A new note has been successfully added!</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alert-close-success-note-create">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <!-- update note successful alert -->
-            <div class="alert alert-success alert-dismissible float-left fade" role="alert" id="alert-success-note-update">
-                <span id="alert-message-success-note-update">The note you selected has been updated!</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alert-close-success-note-update">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <!-- delete note successful alert -->
-            <div class="alert alert-success alert-dismissible float-left fade" role="alert" id="alert-success-note-delete">
-                <span id="alert-message-success-note-delete">The note has been removed</span>
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close" id="alert-close-success-note-delete">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+          <!-- create note successful alert -->
+          <div
+            class="alert alert-success alert-dismissible float-left fade"
+            role="alert"
+            id="alert-success-note-create"
+          >
+            <span id="alert-message-success-note-create"
+              >Great! A new note has been successfully added!</span
+            >
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+              id="alert-close-success-note-create"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <!-- update note successful alert -->
+          <div
+            class="alert alert-success alert-dismissible float-left fade"
+            role="alert"
+            id="alert-success-note-update"
+          >
+            <span id="alert-message-success-note-update"
+              >The note you selected has been updated!</span
+            >
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+              id="alert-close-success-note-update"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <!-- delete note successful alert -->
+          <div
+            class="alert alert-success alert-dismissible float-left fade"
+            role="alert"
+            id="alert-success-note-delete"
+          >
+            <span id="alert-message-success-note-delete"
+              >The note has been removed</span
+            >
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+              id="alert-close-success-note-delete"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
         </div>
 
-        <button style="margin: 0.25em;" type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#note-modal">
-            + Add a New Note
+        <button
+          style="margin: 0.25em"
+          type="button"
+          class="btn btn-info float-right"
+          data-toggle="modal"
+          data-target="#note-modal"
+        >
+          + Add a New Note
         </button>
-
 
         <!-- list showing all notes -->
         <div class="table-responsive">
-            <table class="table table-striped" id="userTable">
-                <thead>
-                <tr>
-                    <th style="width: 20%" scope="col"></th>
-                    <th style="width: 20%" scope="col">Title</th>
-                    <th style="width: 60%" scope="col">Description</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="note : ${noteList}">
-                    <td>
-                        <button type="button" class="btn btn-success" data-toggle="modal" data-target="#note-modal" th:id="'note-button-'+${note.noteId}" th:attr="data-note-id=${note.noteId},data-note-title=${note.noteTitle},data-note-description=${note.noteDescription}">Edit</button>
-                        <a class="btn btn-danger" data-toggle="modal" data-target="#note-delete-modal" th:id="'note-delete-button-'+${note.noteId}" th:attr="data-note-id=${note.noteId},data-note-title=${note.noteTitle}">Delete</a>
-                    </td>
-                    <th scope="row" th:text="${note.noteTitle}">Example Note Title </th>
-                    <td th:text="${note.noteDescription}">Example Note Description </td>
-                </tr>
-                </tbody>
-            </table>
+          <table class="table table-striped" id="userTable">
+            <thead>
+              <tr>
+                <th style="width: 20%" scope="col"></th>
+                <th style="width: 20%" scope="col">Title</th>
+                <th style="width: 60%" scope="col">Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="note : ${noteList}">
+                <td>
+                  <button
+                    type="button"
+                    class="btn btn-success"
+                    data-toggle="modal"
+                    data-target="#note-modal"
+                    th:id="'note-button-'+${note.noteId}"
+                    th:attr="data-note-id=${note.noteId},data-note-title=${note.noteTitle},data-note-description=${note.noteDescription}"
+                  >
+                    Edit
+                  </button>
+                  <a
+                    class="btn btn-danger"
+                    data-toggle="modal"
+                    data-target="#note-delete-modal"
+                    th:id="'note-delete-button-'+${note.noteId}"
+                    th:attr="data-note-id=${note.noteId},data-note-title=${note.noteTitle}"
+                    >Delete</a
+                  >
+                </td>
+                <th scope="row" th:text="${note.noteTitle}">
+                  Example Note Title
+                </th>
+                <td th:text="${note.noteDescription}">
+                  Example Note Description
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-    </section>
+      </section>
 
-    <!-- note create, update modal -->
-    <div class="modal fade show" id="note-modal" tabindex="-1" role="dialog" aria-labelledby="noteModalLabel" aria-hidden="true">
+      <!-- note create, update modal -->
+      <div
+        class="modal fade show"
+        id="note-modal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="noteModalLabel"
+        aria-hidden="true"
+      >
         <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="noteModalLabel">Note</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form action="#" method="POST" th:action="@{/notes/add}" th:object="${newNote}" id="note-modal-form">
-                        <input type="hidden" name="noteId" id="note-id">
-                        <div class="form-group">
-                            <label for="note-title" class="col-form-label">Title</label>
-                            <input type="text" name= "noteTitle" class="form-control" id="note-title" maxlength="20" required th:field="*{noteTitle}">
-                        </div>
-                        <div class="form-group">
-                            <label for="note-description" class="col-form-label">Description</label>
-                            <textarea class="form-control" name="noteDescription" id="note-description" rows="5" maxlength="1000" required th:field="*{noteDescription}"></textarea>
-                        </div>
-                        <button id="noteSubmit" type="submit" class="d-none"></button>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" onclick="$('#noteSubmit').click();">Save changes</button>
-                </div>
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="noteModalLabel">Note</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
+            <div class="modal-body">
+              <form
+                action="#"
+                method="POST"
+                th:action="@{/notes/add}"
+                th:object="${newNote}"
+                id="note-modal-form"
+              >
+                <input type="hidden" name="noteId" id="note-id" />
+                <div class="form-group">
+                  <label for="note-title" class="col-form-label">Title</label>
+                  <input
+                    type="text"
+                    name="noteTitle"
+                    class="form-control"
+                    id="note-title"
+                    maxlength="20"
+                    required
+                    th:field="*{noteTitle}"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="note-description" class="col-form-label"
+                    >Description</label
+                  >
+                  <textarea
+                    class="form-control"
+                    name="noteDescription"
+                    id="note-description"
+                    rows="5"
+                    maxlength="1000"
+                    required
+                    th:field="*{noteDescription}"
+                  ></textarea>
+                </div>
+                <button id="noteSubmit" type="submit" class="d-none"></button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-primary"
+                onclick="$('#noteSubmit').click();"
+              >
+                Save changes
+              </button>
+            </div>
+          </div>
         </div>
+      </div>
+
+      <!-- note delete modal -->
+      <div
+        class="modal fade"
+        id="note-delete-modal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="noteModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="noteDeleteModal">Note</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <span id="note-delete-confirmation-message">
+                Do you want to delete this note?
+              </span>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <a class="btn btn-primary" id="note-delete-link">Delete</a>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
-    <!-- note delete modal -->
-    <div class="modal fade" id="note-delete-modal" tabindex="-1" role="dialog" aria-labelledby="noteModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="noteDeleteModal">Note</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <span id="note-delete-confirmation-message">
-                        Do you want to delete this note?
-                    </span>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <a class="btn btn-primary" id="note-delete-link">Delete</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<th:block layout:fragment="scripts">
-    <script src="/js/notes/.js" th:src="@{/js/notes.js}"></script>
-</th:block>
-
-</body>
+    <th:block layout:fragment="scripts">
+      <script src="/js/notes/.js" th:src="@{/js/notes.js}"></script>
+    </th:block>
+  </body>
 </html>
