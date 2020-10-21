@@ -3,6 +3,7 @@ package com.udacity.jwdnd.course1.cloudstorage.controller;
 import com.udacity.jwdnd.course1.cloudstorage.model.Credential;
 import com.udacity.jwdnd.course1.cloudstorage.services.CredentialService;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
+import com.udacity.jwdnd.course1.cloudstorage.util.SetQueryParamsForOpeningAlertUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ public class CredentialController {
 
     @Autowired
     private CredentialService credentialService;
+
+    @Autowired
+    private SetQueryParamsForOpeningAlertUtil setQueryParamsForOpeningAlertUtil;
 
     @GetMapping
     public String getCredentialsPage(@RequestParam(required = false) Integer id, @ModelAttribute("newCredential") Credential credential, Model model, Authentication authentication){
@@ -43,7 +47,9 @@ public class CredentialController {
         credential.setUserId(userService.getUser(authentication.getName()).getUserId());
         credentialService.createCredential(credential);
 
-        return new ModelAndView ("redirect:/credentials") ;
+        ModelMap model =  setQueryParamsForOpeningAlertUtil.setQueryParamsForAlert(true,"success","credential","create");
+
+        return new ModelAndView ("redirect:/credentials",model) ;
     }
 
     @PostMapping("/update/{id}")
@@ -51,13 +57,17 @@ public class CredentialController {
         credential.setUserId(userService.getUser(authentication.getName()).getUserId());
         credentialService.updateCredential(credential);
 
-        return new ModelAndView ("redirect:/credentials") ;
+        ModelMap model =  setQueryParamsForOpeningAlertUtil.setQueryParamsForAlert(true,"success","credential","update");
+
+        return new ModelAndView ("redirect:/credentials",model) ;
     }
 
     @GetMapping("/delete/{id}")
     public ModelAndView deleteCredential(@PathVariable("id") Integer id){
         credentialService.deleteCredential(id);
 
-        return new ModelAndView ("redirect:/credentials") ;
+        ModelMap model =  setQueryParamsForOpeningAlertUtil.setQueryParamsForAlert(true,"success","credential","delete");
+
+        return new ModelAndView ("redirect:/credentials",model) ;
     }
 }

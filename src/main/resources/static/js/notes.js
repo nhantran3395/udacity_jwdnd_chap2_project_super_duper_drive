@@ -23,23 +23,3 @@ $("#note-delete-modal").on("show.bs.modal", function (event) {
   )
   $("#note-delete-link").attr("href", `notes/delete/${noteId}`)
 })
-
-let urlParams = new URLSearchParams(window.location.search)
-
-let isAlertToBeOpened = urlParams.get("isAlertToBeOpened")
-let alertType = urlParams.get("alertType")
-let alertForResource = urlParams.get("alertForResource")
-let alertContent = urlParams.get("alertContent")
-
-const closeAlert = () => {
-  const alertCloseSelector = `-${alertType}-${alertForResource}-${alertContent}`
-  $("#alert-close" + alertCloseSelector).click()
-}
-
-if (isAlertToBeOpened) {
-  const alertSelector = `-${alertType}-${alertForResource}-${alertContent}`
-  console.log(`from notes script: alertSelector = ${alertSelector}`)
-  $("#alert" + alertSelector).prependTo("#alert-container")
-  $("#alert" + alertSelector).addClass("show")
-  setTimeout(closeAlert, 2000)
-}
