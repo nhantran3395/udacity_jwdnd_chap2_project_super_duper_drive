@@ -1,0 +1,35 @@
+*if create unique folder for each user
+
+common:
+	folder name format: {userid}_{username}
+
+approach 1:
+on registration
+	generate a folder for that new user also
+		->inject FileUploadStorageService into User Service
+
+on download
+	generate regex match {userid}_{username}. then read from folder
+		
+approach 2:		
+on upload file for the 1st time
+	when new user upload file for the first time -> generate folder 
+		->in FileUploadService, check if there is any files corresponded to id of new user
+		->if no: upload file for 1st time -> generate folder
+		->if yes: folder is already there -> reconfirm whether folder exist
+
+on download
+	generate regex match {userid}_{username}. then read from folder
+		
+approach 3:		
+on user registration, write into table 
+	folders (folder_id,user_id,folder_path)
+	
+	or users (storagefoldername)?
+	
+	then on upload, verify if folder exists: 
+		if not exist -> generate folder -> write file into folder
+		if exist -> write file into folder
+
+on download
+	get folder name from db. then read from folder

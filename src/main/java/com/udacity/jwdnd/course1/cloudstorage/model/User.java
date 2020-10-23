@@ -7,6 +7,7 @@ public class User {
     private String salt;
     private String firstName;
     private String lastName;
+    private String storageFolderName;
 
     public User(String username,String password,String salt,String firstName,String lastName){
         this.username = username;
@@ -60,7 +61,9 @@ public class User {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+
+    public String getStorageFolderName() { return storageFolderName; }
+
+    public void setStorageFolderName(String storageFolderName) { this.storageFolderName = storageFolderName; }
 }
