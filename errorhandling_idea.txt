@@ -1,0 +1,36 @@
+approach 1:
+	define an error system
+
+	example:
+	ERRF001: Failed to store empty file
+	ERRF002: Cannot store file with relative path outside current directory
+	ERRF00x: Falied to store file <- common
+
+	how to implement?
+
+	Front-end side
+
+	create errors.js
+
+	define error as const
+	const ERRF001 = "Failed to store empty file"
+
+	implement util to get error message from error code
+	const getErrMsgFromErrCode = (errorCode) => {}
+
+	Back-end side
+
+	modify util setUpQueryParamsForOpeningAlertInCaseOfError to return error code 
+
+	define error code for each exception correspond with errors.js
+
+approach 2 (current):
+	pass error message directly as query param -> js read and display on alert
+
+possible exception:
+file storage:
+1.upload an empty file
+2.upload a file exceeded limit
+3.download a file that is already removed 
+
+

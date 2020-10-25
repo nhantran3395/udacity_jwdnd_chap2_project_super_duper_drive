@@ -23,6 +23,11 @@ if (typeof alertContent === "undefined") {
 }
 alertContent = urlParams.get("alertContent")
 
+if (typeof alertErrorMessage === "undefined") {
+  let alertErrorMessage = urlParams.get("alertErrorMessage")
+}
+alertErrorMessage = urlParams.get("alertErrorMessage")
+
 const closeAlert = () => {
   const alertCloseSelector = `-${alertType}-${alertForResource}-${alertContent}`
   $("#alert-close" + alertCloseSelector).click()
@@ -31,7 +36,16 @@ const closeAlert = () => {
 if (isAlertToBeOpened) {
   const alertSelector = `-${alertType}-${alertForResource}-${alertContent}`
   console.log(`from alert.js: alertSelector = ${alertSelector}`)
+
+  if (alertErrorMessage) {
+    $("#alert-message" + alertSelector + "-cause").text(
+      `Cause: ${alertErrorMessage}`
+    )
+  }
+
   $("#alert" + alertSelector).prependTo("#alert-container")
   $("#alert" + alertSelector).addClass("show")
-  setTimeout(closeAlert, 2000)
+  setTimeout(closeAlert, 5000)
+
+  console.log(alertErrorMessage)
 }

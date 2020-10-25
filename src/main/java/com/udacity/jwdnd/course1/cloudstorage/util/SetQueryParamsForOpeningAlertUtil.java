@@ -16,4 +16,17 @@ public final class SetQueryParamsForOpeningAlertUtil {
 
         return model;
     }
+
+    //set up query params for opening alert in case of error: add alertErrorMessage as argument
+    public final ModelMap setQueryParamsForAlertInCaseOfError(boolean isAlertToBeOpened, String alertType, String alertForResource, String alertContent, String alertErrorMessage){
+        ModelMap model = new ModelMap();
+
+        model.addAttribute("isAlertToBeOpened",isAlertToBeOpened);
+        model.addAttribute("alertType",alertType);
+        model.addAttribute("alertForResource",alertForResource);
+        model.addAttribute("alertContent",alertContent);
+        model.addAttribute("alertErrorMessage",alertErrorMessage);
+
+        return model;
+    }
 }
