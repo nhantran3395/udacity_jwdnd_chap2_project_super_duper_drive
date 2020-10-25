@@ -48,23 +48,45 @@
           >
         </div>
 
-        <div
-          class="alert alert-success alert-dismissible fade float-left"
-          role="alert"
-          id="file-alert"
-        >
-          <span id="file-alert-message"
-            >Great! The file you selected has been successfully uploaded</span
+        <div id="alert-container">
+          <!-- upload file successful alert -->
+          <div
+            class="alert alert-success alert-dismissible float-left fade"
+            role="alert"
+            id="alert-success-file-upload"
           >
-          <button
-            type="button"
-            class="close"
-            data-dismiss="alert"
-            aria-label="Close"
-            id="file-alert-close-button"
+            <span id="alert-message-success-file-upload"
+              >Great! The file has been stored.</span
+            >
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+              id="alert-close-success-file-upload"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <!-- remove file successful alert -->
+          <div
+            class="alert alert-success alert-dismissible float-left fade"
+            role="alert"
+            id="alert-success-file-remove"
           >
-            <span aria-hidden="true">&times;</span>
-          </button>
+            <span id="alert-message-success-file-remove"
+              >The file has been removed</span
+            >
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+              id="alert-close-success-file-remove"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
         </div>
 
         <div class="table-responsive">
