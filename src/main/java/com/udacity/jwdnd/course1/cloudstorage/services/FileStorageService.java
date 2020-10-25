@@ -29,23 +29,25 @@ import java.util.stream.Stream;
 
 @Service
 public class FileStorageService implements StorageService{
-    private final Path rootLocation;
-    private FileMapper fileMapper;
-    private Stream<Path> filesBelongToUser;
 
     @Autowired
-    public FileStorageService(StorageProperties properties, FileMapper fileMapper) {
-        this.rootLocation = Paths.get(properties.getLocation());
-        this.fileMapper = fileMapper;
-    }
+    private StorageProperties storageProperties;
+
+    private Path rootLocation;
+
+    @Autowired
+    private FileMapper fileMapper;
+
+    private Stream<Path> collectionOfFilesBelongToUser;
 
     @PostConstruct
-    public void setUpFilesBelongToUser(){
-        this.filesBelongToUser = Stream.empty();
+    public void postConstruct(){
+        this.rootLocation = Paths.get(storageProperties.getLocation());
+        this.collectionOfFilesBelongToUser = Stream.empty();
     }
 
     @Override
-    public void store(MultipartFile file, Integer userId) {
+    public void store(MultipartFile file, Integer userId, String storageFolderName) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
         try {
             if (file.isEmpty()) {
@@ -57,11 +59,20 @@ public class FileStorageService implements StorageService{
                         "Cannot store file with relative path outside current directory "
                                 + filename);
             }
+
+            //Check if user specific storage folder exist or not. if not, create the folder.
+            Path pathOfFolder = this.rootLocation.resolve(storageFolderName);
+            if(!isStorageFolderForUserAlreadyExist(pathOfFolder)){
+                setupStorageFolderForUser(pathOfFolder);
+            }
+
+            //Write file into user specific storage folder
             try (InputStream inputStream = file.getInputStream()) {
-                Path path = this.rootLocation.resolve(filename);
+                Path path = pathOfFolder.resolve(filename);
 
                 Files.copy(inputStream, path,
                         StandardCopyOption.REPLACE_EXISTING);
+
                 fileMapper.createFile(new FileUpload(null,filename,this.getFileExtension(filename),this.getFileSize(path),userId));
             }
         }
@@ -71,46 +82,34 @@ public class FileStorageService implements StorageService{
     }
 
     @Override
-    public Stream<Path> loadAll() {
-        try {
-            return Files.walk(this.rootLocation, 1)
-                    .filter(path -> !path.equals(this.rootLocation))
-                    .map(this.rootLocation::relativize);
-        }
-        catch (IOException e) {
-            throw new StorageException("Failed to read stored files", e);
-        }
-    }
-
-    @Override
-    public Stream<Path> loadByUserId(Integer userId){
-            List<String> listOfFilenameBelongToUser = new ArrayList<String>();
+    public Stream<Path> loadByUserId(Integer userId,String storageFolderName){
+            List<String> listOfFilesBelongToUser = new ArrayList<String>();
             fileMapper.getFilesByUserId(userId).forEach(file ->
                 {
-                    listOfFilenameBelongToUser.add(file.getFileName());
+                    listOfFilesBelongToUser.add(file.getFileName());
                 }
              );
 
-            filesBelongToUser = Stream.empty();
+            collectionOfFilesBelongToUser = Stream.empty();
 
-            listOfFilenameBelongToUser.forEach(filename->
+            listOfFilesBelongToUser.forEach(filename->
                 {
-                    filesBelongToUser = Stream.concat(filesBelongToUser,Stream.of(load(filename)));
+                    collectionOfFilesBelongToUser = Stream.concat(collectionOfFilesBelongToUser,Stream.of(load(filename,storageFolderName)));
                 }
             );
 
-            return filesBelongToUser.map(this.rootLocation::relativize);
+            return collectionOfFilesBelongToUser.map(this.rootLocation.resolve(storageFolderName)::relativize);
     }
 
     @Override
-    public Path load(String filename) {
-        return rootLocation.resolve(filename);
+    public Path load(String filename,String storageFolderName) {
+        return rootLocation.resolve(storageFolderName).resolve(filename);
     }
 
     @Override
-    public Resource loadAsResource(String filename) {
+    public Resource loadAsResource(String filename, String storageFolderName) {
         try {
-            Path file = load(filename);
+            Path file = load(filename,storageFolderName);
             Resource resource = new UrlResource(file.toUri());
             if (resource.exists() || resource.isReadable()) {
                 return resource;
@@ -132,10 +131,10 @@ public class FileStorageService implements StorageService{
     }
 
     @Override
-    public void delete(String filename) {
+    public void delete(Integer userId, String filename,String storageFolderName) {
         try{
-            FileSystemUtils.deleteRecursively(this.load(filename));
-            fileMapper.deleteFile(filename);
+            FileSystemUtils.deleteRecursively(this.load(filename,storageFolderName));
+            fileMapper.deleteFileByNameAndUserId(filename,userId);
         }catch(IOException e){
             throw new StorageException("Failed to delete file " + filename, e);
         }
@@ -147,7 +146,21 @@ public class FileStorageService implements StorageService{
             Files.createDirectories(rootLocation);
         }
         catch (IOException e) {
-            throw new StorageException("Could not initialize storage", e);
+            throw new StorageException("Could not initialize parent storage folder", e);
+        }
+    }
+
+    private boolean isStorageFolderForUserAlreadyExist(Path pathOfFolder){
+         return Files.exists(pathOfFolder);
+    }
+
+    private void setupStorageFolderForUser(Path pathOfFolder){
+
+        try {
+            Files.createDirectory(pathOfFolder);
+        }
+        catch (IOException e) {
+            throw new StorageException("Could not initialize user specific storage folder", e);
         }
     }
 

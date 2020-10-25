@@ -22,6 +22,6 @@ public interface FileMapper {
     @Insert("INSERT INTO FILES(filename,contenttype,filesize,userid) VALUES (#{fileName},#{contentType},#{fileSize},#{userId})")
     Integer createFile(FileUpload file);
 
-    @Delete("DELETE FROM FILES WHERE filename=#{filename}")
-    Integer deleteFile(String filename);
+    @Delete("DELETE FROM FILES WHERE filename=#{filename} AND userid=#{userId}")
+    Integer deleteFileByNameAndUserId(String filename,Integer userId);
 }

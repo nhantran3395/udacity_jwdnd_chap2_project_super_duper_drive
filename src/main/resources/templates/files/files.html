@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
+  <head>
+    <title>Store files</title>
+  </head>
+  <body>
+    <div layout:fragment="content">
+      <section>
+        <form
+          action="#"
+          enctype="multipart/form-data"
+          method="POST"
+          th:action="@{/files/add}"
+        >
+          <div class="container">
+            <div class="row" style="margin: 1em">
+              <div class="col-sm-2">
+                <label for="fileUpload">Upload a New File:</label>
+              </div>
+              <div class="col-sm-6">
+                <input
+                  type="file"
+                  class="form-control-file"
+                  id="fileUpload"
+                  name="fileUpload"
+                  required
+                />
+              </div>
+              <div class="col-sm-4">
+                <button type="submit" class="btn btn-dark">Upload</button>
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <div
+          class="alert alert-dark float-left show mr-2"
+          role="alert"
+          id="file-size-max-alert"
+        >
+          <span id="file-size-max-message"
+            >Please upload a file that is less than 200kb</span
+          >
+        </div>
+
+        <div id="alert-container">
+          <!-- upload file successful alert -->
+          <div
+            class="alert alert-success alert-dismissible float-left fade"
+            role="alert"
+            id="alert-success-file-upload"
+          >
+            <span id="alert-message-success-file-upload"
+              >Great! The file has been stored.</span
+            >
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+              id="alert-close-success-file-upload"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <!-- remove file successful alert -->
+          <div
+            class="alert alert-success alert-dismissible float-left fade"
+            role="alert"
+            id="alert-success-file-remove"
+          >
+            <span id="alert-message-success-file-remove"
+              >The file has been removed</span
+            >
+            <button
+              type="button"
+              class="close"
+              data-dismiss="alert"
+              aria-label="Close"
+              id="alert-close-success-file-remove"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-striped" id="fileTable">
+            <thead>
+              <tr>
+                <th style="width: 20%" scope="col"></th>
+                <th style="width: 80%" scope="col">File Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr th:each="file:${files}">
+                <td>
+                  <a class="btn btn-success" th:href="@{'files/'+${file}}"
+                    >View</a
+                  >
+                  <a class="btn btn-danger" th:href="@{'files/delete/'+${file}}"
+                    >Delete</a
+                  >
+                </td>
+                <th scope="row" th:text="${file}">ExampleFile.txt</th>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </div>
+
+    <th:block layout:fragment="scripts">
+      <script src="/js/files/.js" th:src="@{/js/files.js}"></script>
+    </th:block>
+  </body>
+</html>
