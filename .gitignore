@@ -34,3 +34,8 @@ target/
 
 ### file upload folder ###
 upload-dir
+
+### non-relevant-data ###
+file_upload_test_data
+*_idea.txt
+debug.log
