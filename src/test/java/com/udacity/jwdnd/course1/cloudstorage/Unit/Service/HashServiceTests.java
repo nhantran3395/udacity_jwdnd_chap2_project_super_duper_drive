@@ -1,4 +1,4 @@
-package com.udacity.jwdnd.course1.cloudstorage;
+package com.udacity.jwdnd.course1.cloudstorage.Unit.Service;
 
 import com.udacity.jwdnd.course1.cloudstorage.services.HashService;
 import org.junit.jupiter.api.Test;

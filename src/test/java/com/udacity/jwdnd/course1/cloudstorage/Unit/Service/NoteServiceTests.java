@@ -1,12 +1,9 @@
-package com.udacity.jwdnd.course1.cloudstorage;
+package com.udacity.jwdnd.course1.cloudstorage.Unit.Service;
 
 import com.udacity.jwdnd.course1.cloudstorage.model.Note;
 import com.udacity.jwdnd.course1.cloudstorage.services.NoteService;
-import com.udacity.jwdnd.course1.cloudstorage.services.StorageService;
 import org.junit.jupiter.api.Test;
 import org.mybatis.spring.boot.test.autoconfigure.MybatisTest;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.mongo.embedded.EmbeddedMongoProperties;
 import org.springframework.context.annotation.Import;
 
 import java.util.List;
@@ -17,11 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @Import(NoteService.class)
 
 public class NoteServiceTests{
-    @Autowired
-    private StorageService storageService;
-
-    @Autowired
-    private NoteService noteService;
+    NoteService noteService;
 
     @Test
     public void testNoteServiceGetNotesByUserId(){

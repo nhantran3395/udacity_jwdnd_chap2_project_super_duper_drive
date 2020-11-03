@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/notes")
-public class NoteController {
+public class    NoteController {
 
     @Autowired
     private UserService userService;
@@ -44,6 +44,7 @@ public class NoteController {
 
     @PostMapping("/update/{id}")
     public ModelAndView updateNote(@PathVariable("id") Integer id, @ModelAttribute("newNote") Note note, Authentication authentication){
+        note.setNoteId(id);
         note.setUserId(userService.getUser(authentication.getName()).getUserId());
         noteService.updateNote(note);
 

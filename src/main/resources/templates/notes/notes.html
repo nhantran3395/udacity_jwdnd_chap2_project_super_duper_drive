@@ -19,7 +19,7 @@
             id="alert-success-note-create"
           >
             <span id="alert-message-success-note-create"
-              >Great! A new note has been successfully added!</span
+              >Great! A new note has been successfully added!</id
             >
             <button
               type="button"
@@ -76,14 +76,15 @@
           type="button"
           class="btn btn-info float-right"
           data-toggle="modal"
-          data-target="#note-modal"
+          data-target="#note-modal-cru"
+          th:id="note-create-button"
         >
           + Add a New Note
         </button>
 
         <!-- list showing all notes -->
         <div class="table-responsive">
-          <table class="table table-striped" id="userTable">
+          <table class="table table-striped" >
             <thead>
               <tr>
                 <th style="width: 20%" scope="col"></th>
@@ -98,8 +99,8 @@
                     type="button"
                     class="btn btn-success"
                     data-toggle="modal"
-                    data-target="#note-modal"
-                    th:id="'note-button-'+${note.noteId}"
+                    data-target="#note-modal-cru"
+                    th:id="'note-update-button-'+${note.noteId}"
                     th:attr="data-note-id=${note.noteId},data-note-title=${note.noteTitle},data-note-description=${note.noteDescription}"
                   >
                     Edit
@@ -107,16 +108,16 @@
                   <a
                     class="btn btn-danger"
                     data-toggle="modal"
-                    data-target="#note-delete-modal"
+                    data-target="#note-modal-delete"
                     th:id="'note-delete-button-'+${note.noteId}"
                     th:attr="data-note-id=${note.noteId},data-note-title=${note.noteTitle}"
                     >Delete</a
                   >
                 </td>
-                <th scope="row" th:text="${note.noteTitle}">
+                <th scope="row" th:text="${note.noteTitle}" th:id="'note-data-title-'+${note.noteId}">
                   Example Note Title
                 </th>
-                <td th:text="${note.noteDescription}">
+                <td th:text="${note.noteDescription}" th:id="'note-data-description-'+${note.noteId}">
                   Example Note Description
                 </td>
               </tr>
@@ -128,7 +129,7 @@
       <!-- note create, update modal -->
       <div
         class="modal fade show"
-        id="note-modal"
+        id="note-modal-cru"
         tabindex="-1"
         role="dialog"
         aria-labelledby="noteModalLabel"
@@ -137,7 +138,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="noteModalLabel">Note</h5>
+              <h5 class="modal-title" >Note</h5>
               <button
                 type="button"
                 class="close"
@@ -155,14 +156,13 @@
                 th:object="${newNote}"
                 id="note-modal-form"
               >
-                <input type="hidden" name="noteId" id="note-id" />
                 <div class="form-group">
                   <label for="note-title" class="col-form-label">Title</label>
                   <input
                     type="text"
                     name="noteTitle"
                     class="form-control"
-                    id="note-title"
+                    id="note-modal-title-input"
                     maxlength="20"
                     required
                     th:field="*{noteTitle}"
@@ -175,14 +175,14 @@
                   <textarea
                     class="form-control"
                     name="noteDescription"
-                    id="note-description"
+                    id="note-modal-description-input"
                     rows="5"
                     maxlength="1000"
                     required
                     th:field="*{noteDescription}"
                   ></textarea>
                 </div>
-                <button id="noteSubmit" type="submit" class="d-none"></button>
+                <button id="note-form-submit" type="submit" class="d-none"></button>
               </form>
             </div>
             <div class="modal-footer">
@@ -190,13 +190,15 @@
                 type="button"
                 class="btn btn-secondary"
                 data-dismiss="modal"
+                th:id="note-modal-close-button"
               >
                 Close
               </button>
               <button
                 type="button"
                 class="btn btn-primary"
-                onclick="$('#noteSubmit').click();"
+                th:id="note-modal-save-button"
+                onclick="$('#note-form-submit').click();"
               >
                 Save changes
               </button>
@@ -208,7 +210,7 @@
       <!-- note delete modal -->
       <div
         class="modal fade"
-        id="note-delete-modal"
+        id="note-modal-delete"
         tabindex="-1"
         role="dialog"
         aria-labelledby="noteModalLabel"
@@ -217,7 +219,7 @@
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="noteDeleteModal">Note</h5>
+              <h5 class="modal-title" >Note</h5>
               <button
                 type="button"
                 class="close"
@@ -240,7 +242,7 @@
               >
                 Close
               </button>
-              <a class="btn btn-primary" id="note-delete-link">Delete</a>
+              <a class="btn btn-primary" id="note-modal-delete-link">Delete</a>
             </div>
           </div>
         </div>
