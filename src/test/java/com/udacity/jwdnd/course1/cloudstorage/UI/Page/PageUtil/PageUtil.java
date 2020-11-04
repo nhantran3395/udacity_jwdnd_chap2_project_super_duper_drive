@@ -14,7 +14,7 @@ public class PageUtil {
     }
 
     public void waitForVisibility(WebElement element) throws Error{
-        new WebDriverWait(driver, 60)
+        new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.visibilityOf(element));
     }
 }

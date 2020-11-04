@@ -55,6 +55,7 @@ public class CredentialController {
     @PostMapping("/update/{id}")
     public ModelAndView updateCredential(@PathVariable("id") Integer id, @ModelAttribute("newCredential") Credential credential, Authentication authentication){
         credential.setUserId(userService.getUser(authentication.getName()).getUserId());
+        credential.setCredentialId(id);
         credentialService.updateCredential(credential);
 
         ModelMap model =  setQueryParamsForOpeningAlertUtil.setQueryParamsForAlert(true,"success","credential","update");
