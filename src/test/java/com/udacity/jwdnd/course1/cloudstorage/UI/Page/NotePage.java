@@ -62,11 +62,11 @@ public class NotePage  {
     private WebElement noteDeleteButton;
 
     public String getNoteTitleInput(){
-        return noteModalTitleInput.getText();
+        return noteModalTitleInput.getAttribute("value");
     }
 
     public String getNoteDescriptionInput(){
-        return noteModalDescriptionInput.getText();
+        return noteModalDescriptionInput.getAttribute("value");
     }
 
     public String getNoteDataTitle(){

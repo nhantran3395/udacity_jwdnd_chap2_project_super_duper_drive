@@ -94,8 +94,8 @@ public class NoteTests {
 
         //verify title & description of the selected note is correctly displayed on modal opening (update note)
         notePage.openNoteUpdateModal();
-        assertEquals(noteTitleCurrent,notePage.getNoteDataTitle());
-        assertEquals(noteDescriptionCurrent,notePage.getNoteDataDescription());
+        assertEquals(noteTitleCurrent,notePage.getNoteTitleInput());
+        assertEquals(noteDescriptionCurrent,notePage.getNoteDescriptionInput());
 
         //verify update successful alert is shown and updated title & description of the note is correctly displayed on Note List after save
         notePage.saveNote(noteTitleUpdate,noteDescriptionUpdate);
