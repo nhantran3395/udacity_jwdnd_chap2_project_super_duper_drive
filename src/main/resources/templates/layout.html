@@ -22,49 +22,65 @@
   </head>
   <body>
     <!-- Main Navigation -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-primary">
-      <a class="navbar-brand" th:href="@{/}">Super Duper Drive</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbar"
-        aria-controls="navbar"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <div class="container">
+        <a class="navbar-brand" th:href="@{/}">Super Duper Drive</a>
 
-      <div class="collapse navbar-collapse" id="navbar">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item active">
-            <a class="nav-link" th:href="@{/}">Start here</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/files}">Files</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/notes}">Notes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" th:href="@{/credentials}">Credentials</a>
-          </li>
-        </ul>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbar"
+          aria-controls="navbar"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar">
+          <ul class="navbar-nav mx-auto">
+            <li class="nav-item active">
+              <a class="nav-link" th:href="@{/}">Start here</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/files}">Files</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/notes}">Notes</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/credentials}">Credentials</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="dropdown">
+          <button
+            class="btn btn-outline-primary dropdown-toggle"
+            data-toggle="dropdown"
+          >
+            thanhnhan33.95
+          </button>
+
+          <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item" href="#">Sign out</a>
+          </div>
+        </div>
       </div>
     </nav>
 
     <!-- Content Section -->
     <section layout:fragment="content">
-      <p>This is filled by the content template.</p>
+      <div class="container">
+        <p>This is filled by the content template.</p>
+      </div>
     </section>
 
     <!-- Footer -->
-    <footer class="container py-5">
-      <div class="row">
-        <div class="col-md-12">
-          <p class="text-muted">&copy; Built by Nhan Thanh Tran .</p>
-        </div>
+    <footer class="bg-light fixed-bottom">
+      <div class="container">
+        <p class="text-muted text-center">&copy; Built by Nhan Thanh Tran .</p>
       </div>
     </footer>
 
