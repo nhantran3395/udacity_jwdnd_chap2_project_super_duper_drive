@@ -10,173 +10,173 @@
   </head>
   <body>
     <div layout:fragment="content">
-      <section>
+      <section class="container">
+        <div
+          class="d-flex justify-content-between align-items-center mt-3"
+          style="height: 50px"
+        >
+          <div id="alert-container">
+            <!-- upload file successful alert -->
+            <div
+              class="alert alert-success alert-dismissible float-left fade d-none"
+              role="alert"
+              id="alert-success-file-upload"
+            >
+              <span id="alert-message-success-file-upload"
+                >Great! The file has been stored.</span
+              >
+              <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+                id="alert-close-success-file-upload"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <!-- remove file successful alert -->
+            <div
+              class="alert alert-success alert-dismissible float-left fade d-none"
+              role="alert"
+              id="alert-success-file-remove"
+            >
+              <span id="alert-message-success-file-remove"
+                >The file has been removed</span
+              >
+              <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+                id="alert-close-success-file-remove"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <!-- storage failure alert -->
+            <div
+              class="alert alert-danger alert-dismissible float-left fade d-none"
+              role="alert"
+              id="alert-error-file-storageFailure"
+            >
+              <span id="alert-message-error-file-storageFailure"
+                >Oops! Something went wrong and we could not store the file.
+                Please try again. <br />
+              </span>
+              <span id="alert-message-error-file-storageFailure-cause"
+                >Cause
+              </span>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+                id="alert-close-error-file-storageFailure"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <!-- storage file not found alert -->
+            <div
+              class="alert alert-danger alert-dismissible float-left fade d-none"
+              role="alert"
+              id="alert-error-file-storageFileNotFound"
+            >
+              <span id="alert-message-error-file-storageFileNotFound"
+                >Oops! Something went wrong and we could not get the file from
+                storage. Please try again. <br />
+              </span>
+              <span id="alert-message-error-file-storageFileNotFound-cause"
+                >Cause
+              </span>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+                id="alert-close-error-file-storageFileNotFound"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <!-- size limit exceeded alert -->
+            <div
+              class="alert alert-danger alert-dismissible float-left fade d-none"
+              role="alert"
+              id="alert-error-file-sizeLimitExceeded"
+            >
+              <span id="alert-message-error-file-sizeLimitExceeded"
+                >Oops! Something went wrong and we could not get the file from
+                storage. Please try again. <br />
+              </span>
+              <span id="alert-message-error-file-sizeLimitExceeded-cause"
+                >Cause
+              </span>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="alert"
+                aria-label="Close"
+                id="alert-close-error-file-sizeLimitExceeded"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+          </div>
+          <!-- alert container -->
+
+          <button type="submit" form="file-upload-form" class="btn btn-primary">
+            Upload file +
+          </button>
+        </div>
+
         <form
           action="#"
           enctype="multipart/form-data"
           method="POST"
           th:action="@{/files/add}"
+          class="mb-5"
+          id="file-upload-form"
         >
-          <div class="container">
-            <div class="row" style="margin: 1em">
-              <div class="col-sm-2">
-                <label for="fileUpload">Upload a New File:</label>
-              </div>
-              <div class="col-sm-6">
-                <input
-                  type="file"
-                  class="form-control-file"
-                  id="fileUpload"
-                  name="fileUpload"
-                  required
-                />
-              </div>
-              <div class="col-sm-4">
-                <button type="submit" class="btn btn-dark">Upload</button>
-              </div>
-            </div>
+          <div class="custom-file">
+            <input
+              type="file"
+              class="form-control-file custom-file-input"
+              id="fileUpload"
+              name="fileUpload"
+            />
+            <label for="fileUpload" class="custom-file-label"
+              >Choose file</label
+            >
           </div>
         </form>
 
-        <div
-          class="alert alert-dark float-left show mr-2"
-          role="alert"
-          id="file-size-max-alert"
-        >
-          <span id="file-size-max-message"
-            >Please upload a file that is less than 200kb</span
-          >
-        </div>
-
-        <div id="alert-container">
-          <!-- upload file successful alert -->
-          <div
-            class="alert alert-success alert-dismissible float-left fade"
-            role="alert"
-            id="alert-success-file-upload"
-          >
-            <span id="alert-message-success-file-upload"
-              >Great! The file has been stored.</span
-            >
-            <button
-              type="button"
-              class="close"
-              data-dismiss="alert"
-              aria-label="Close"
-              id="alert-close-success-file-upload"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <!-- remove file successful alert -->
-          <div
-            class="alert alert-success alert-dismissible float-left fade"
-            role="alert"
-            id="alert-success-file-remove"
-          >
-            <span id="alert-message-success-file-remove"
-              >The file has been removed</span
-            >
-            <button
-              type="button"
-              class="close"
-              data-dismiss="alert"
-              aria-label="Close"
-              id="alert-close-success-file-remove"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <!-- storage failure alert -->
-          <div
-            class="alert alert-danger alert-dismissible float-left fade"
-            role="alert"
-            id="alert-error-file-storageFailure"
-          >
-            <span id="alert-message-error-file-storageFailure"
-              >Oops! Something went wrong and we could not store the file.
-              Please try again. <br />
-            </span>
-            <span id="alert-message-error-file-storageFailure-cause"
-              >Cause
-            </span>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="alert"
-              aria-label="Close"
-              id="alert-close-error-file-storageFailure"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <!-- storage file not found alert -->
-          <div
-            class="alert alert-danger alert-dismissible float-left fade"
-            role="alert"
-            id="alert-error-file-storageFileNotFound"
-          >
-            <span id="alert-message-error-file-storageFileNotFound"
-              >Oops! Something went wrong and we could not get the file from
-              storage. Please try again. <br />
-            </span>
-            <span id="alert-message-error-file-storageFileNotFound-cause"
-              >Cause
-            </span>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="alert"
-              aria-label="Close"
-              id="alert-close-error-file-storageFileNotFound"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <!-- size limit exceeded alert -->
-          <div
-            class="alert alert-danger alert-dismissible float-left fade"
-            role="alert"
-            id="alert-error-file-sizeLimitExceeded"
-          >
-            <span id="alert-message-error-file-sizeLimitExceeded"
-              >Oops! Something went wrong and we could not get the file from
-              storage. Please try again. <br />
-            </span>
-            <span id="alert-message-error-file-sizeLimitExceeded-cause"
-              >Cause
-            </span>
-            <button
-              type="button"
-              class="close"
-              data-dismiss="alert"
-              aria-label="Close"
-              id="alert-close-error-file-sizeLimitExceeded"
-            >
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-        </div>
+        <h1 class="mb-3">Files that you uploaded so far</h1>
 
         <div class="table-responsive">
-          <table class="table table-striped" id="fileTable">
-            <thead>
+          <table class="table table-light" id="fileTable">
+            <thead class="bg-light">
               <tr>
-                <th style="width: 20%" scope="col"></th>
                 <th style="width: 80%" scope="col">File Name</th>
+                <th style="width: 20%" scope="col"></th>
               </tr>
             </thead>
             <tbody>
               <tr th:each="file:${files}">
+                <td th:text="${file}">ExampleFile.txt</td>
                 <td>
-                  <a class="btn btn-success" th:href="@{'files/'+${file}}"
+                  <a
+                    class="btn btn-outline-success"
+                    th:href="@{'files/'+${file}}"
                     >View</a
                   >
-                  <a class="btn btn-danger" th:href="@{'files/delete/'+${file}}"
+                  <a
+                    class="btn btn-outline-danger"
+                    th:href="@{'files/delete/'+${file}}"
                     >Delete</a
                   >
                 </td>
-                <th scope="row" th:text="${file}">ExampleFile.txt</th>
               </tr>
             </tbody>
           </table>
