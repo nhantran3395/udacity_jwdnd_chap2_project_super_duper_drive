@@ -11,9 +11,123 @@
 
   <body>
     <div layout:fragment="content">
-      <div class="container">
-        <h2>This is home page</h2>
+      <div class="container d-flex flex-column mb-5">
+        <div class="jumbotron bg-white">
+          <h1>Welcome to Super Duper Drive</h1>
+          <h2 class="lead">
+            One place to store your things and get them quickly on the go.
+          </h2>
+        </div>
+        <!-- jumbotron -->
+
+        <div class="row row-cols-1 mx-2">
+          <div class="card mb-5">
+            <div class="row no-gutters">
+              <div class="col-md-10 d-flex flex-column">
+                <div class="card-body">
+                  <h2 class="card-title">Files</h2>
+                  <p class="card-subtitle">
+                    Store docs, images and grab them when needed.
+                  </p>
+                </div>
+                <!-- card-body -->
+
+                <div class="card-footer bg-white border-0">
+                  <a href="/files" class="card-link my-5"
+                    >Go to files &#8594;</a
+                  >
+                </div>
+              </div>
+              <!-- column 8-->
+
+              <div class="col-md-2">
+                <div class="mx-5 my-5 mx-md-0 my-md-0">
+                  <img
+                    th:src="@{./img/folder-set-2.svg}"
+                    class="card-img img-fluid"
+                  />
+                </div>
+              </div>
+              <!-- column 4 -->
+            </div>
+            <!-- row -->
+          </div>
+          <!-- card -->
+
+          <div class="card mb-5">
+            <div class="row no-gutters">
+              <div class="col-md-10 d-flex flex-column">
+                <div class="card-body">
+                  <h2 class="card-title">Notes</h2>
+                  <p class="card-subtitle">
+                    Add notes, memos or grocery lists so that you will remember
+                    and get done.
+                  </p>
+                </div>
+                <!-- card-body -->
+
+                <div class="card-footer bg-white border-0">
+                  <a href="/notes" class="card-link">Go to notes &#8594;</a>
+                </div>
+                <!-- card-footer -->
+              </div>
+              <!-- column 8-->
+
+              <div class="col-md-2">
+                <div class="mx-5 my-5 mx-md-0 my-md-0">
+                  <img
+                    th:src="@{./img/note-set-2.svg}"
+                    class="card-img img-fluid"
+                  />
+                </div>
+              </div>
+              <!-- column 4 -->
+            </div>
+            <!-- row -->
+          </div>
+          <!-- card -->
+
+          <div class="card mb-5">
+            <div class="row no-gutters">
+              <div class="col-md-10 d-flex flex-column">
+                <div class="card-body">
+                  <h2 class="card-title">Credentials</h2>
+                  <p class="card-subtitle">
+                    Keeptring track of all your subscriptions and their username
+                    & password can be a daunting thing.<br />
+                    Here you can store them and never lost track of your
+                    subscriptions again.
+                  </p>
+                </div>
+                <!-- card-body -->
+
+                <div class="card-footer bg-white border-0">
+                  <a href="/credentials" class="card-link my-5"
+                    >Go to credentials &#8594;</a
+                  >
+                </div>
+                <!-- card-footer -->
+              </div>
+              <!-- column 8-->
+
+              <div class="col-md-2">
+                <div class="mx-5 my-5 mx-md-0 my-md-0">
+                  <img
+                    th:src="@{./img/id-set-2.svg}"
+                    class="card-img img-fluid"
+                  />
+                </div>
+              </div>
+              <!-- column 4 -->
+            </div>
+            <!-- row -->
+          </div>
+          <!-- card -->
+        </div>
+        <!-- card layout row -->
       </div>
+      <!-- container -->
     </div>
+    <!-- layout:fragment -->
   </body>
 </html>
