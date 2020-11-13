@@ -44,7 +44,9 @@ if (isAlertToBeOpened) {
   }
 
   $("#alert" + alertSelector).prependTo("#alert-container")
+  $("#alert" + alertSelector).removeClass("d-none")
   $("#alert" + alertSelector).addClass("show")
+
   setTimeout(closeAlert, 5000)
 
   console.log(alertErrorMessage)
