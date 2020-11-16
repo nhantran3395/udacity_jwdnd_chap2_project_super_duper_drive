@@ -3,6 +3,7 @@
   lang="en"
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
 >
   <head>
     <meta charset="UTF-8" />
@@ -59,8 +60,9 @@
           <button
             class="btn btn-outline-primary dropdown-toggle"
             data-toggle="dropdown"
+            sec:authentication="name"
           >
-            thanhnhan33.95
+            Username
           </button>
 
           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
