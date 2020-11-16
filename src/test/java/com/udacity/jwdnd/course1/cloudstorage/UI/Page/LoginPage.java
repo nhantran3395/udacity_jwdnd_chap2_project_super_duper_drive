@@ -16,6 +16,12 @@ public class LoginPage {
     @FindBy(id="button-login")
     private WebElement buttonLogin;
 
+    @FindBy(id="alert-error-login-invalid-username-password")
+    private WebElement alertErrorLoginInvalidUsernamePassword;
+
+    @FindBy(id="alert-successful-logout")
+    private WebElement alertSuccessfulLogout;
+
     public LoginPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
@@ -25,4 +31,13 @@ public class LoginPage {
         inputPassword.sendKeys(password);
         buttonLogin.click();
     }
+
+    public String getAlertSuccessfulLogoutText(){
+        return alertSuccessfulLogout.getText();
+    }
+
+    public String getAlertErrorLoginInvalidUsernamePassword(){
+        return alertErrorLoginInvalidUsernamePassword.getText();
+    }
+
 }
