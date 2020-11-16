@@ -20,12 +20,13 @@
 
     <title>Login</title>
   </head>
-  <body class="p-3 mb-2 bg-light text-black">
-    <div
-      class="container justify-content-center w-25 p-3"
-      style="background-color: #eeeeee; margin-top: 5em"
-    >
-      <h1 class="display-5">Login</h1>
+  <body
+    class="container d-flex justify-content-center align-items-center vh-100 flex-column"
+  >
+    <h1 class="mb-5">Welcome to Super Duper Drive</h1>
+
+    <div class="w-50 h-50">
+      <!-- <h1>Login</h1> -->
       <form action="#" method="POST" th:action="@{/login}">
         <div class="alert alert-danger" th:if="${param.error}">
           Invalid username or password
