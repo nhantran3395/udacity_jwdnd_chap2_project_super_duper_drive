@@ -150,4 +150,41 @@ public class SignupLoginTests {
         assertEquals(alertErrorLoginInvalidUsernamePassword,loginPage.getAlertErrorLoginInvalidUsernamePassword());
     }
 
+    @Test
+    public void testHomePageIsNotAccessiblePriorLogin(){
+        driver.get(baseURL + "/");
+
+        //verify that user is redirected to login page
+        assertEquals(driver.getCurrentUrl(),baseURL+"/login");
+    }
+
+    @Test
+    @Order(5)
+    public void testHomePageIsNotAccessibleAfterLogout(){
+        String username = "antoniomoore";
+        String password = "brad";
+
+        driver.get(baseURL + "/login");
+
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.login(username,password);
+
+        assertEquals(driver.getCurrentUrl(),baseURL+"/");
+
+        driver.get(baseURL + "/logout");
+
+        //verify that user will be redirected to login page after logout
+        assertEquals(driver.getCurrentUrl(),baseURL+"/login?logout");
+
+        String alertSuccessfulLogout = "You have been logged out";
+
+        assertEquals(alertSuccessfulLogout,loginPage.getAlertSuccessfulLogoutText());
+
+        driver.get(baseURL + "/");
+
+        //verify that user will be redirected to login page when trying to access home page without logging in
+        assertEquals(driver.getCurrentUrl(),baseURL+"/login");
+
+    }
+
 }
