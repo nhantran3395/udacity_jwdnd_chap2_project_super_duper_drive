@@ -16,6 +16,9 @@ public interface FileMapper {
     @Select("SELECT * FROM FILES WHERE userid=#{userId}")
     List<FileUpload> getFilesByUserId(Integer userId);
 
+    @Select("SELECT * FROM FILES WHERE filename=#{filename} AND userid=#{userId}")
+    FileUpload getFilesByNameAndUserId(String filename, Integer userId);
+
     @Select("SELECT * FROM FILES WHERE fileid=#{fileId}")
     FileUpload getFileById(Integer fileId);
 

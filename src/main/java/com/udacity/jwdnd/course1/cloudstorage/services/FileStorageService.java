@@ -59,6 +59,9 @@ public class FileStorageService implements StorageService{
                         "Cannot store file with relative path outside current directory "
                                 + filename);
             }
+            if(fileMapper.getFilesByNameAndUserId(filename,userId) != null){
+                throw new StorageException("File with name " + filename + " is already uploaded");
+            }
 
             //Check if user specific storage folder exist or not. if not, create the folder.
             Path pathOfFolder = this.rootLocation.resolve(storageFolderName);
