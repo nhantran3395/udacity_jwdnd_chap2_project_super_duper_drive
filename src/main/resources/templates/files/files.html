@@ -126,7 +126,12 @@
           </div>
           <!-- alert container -->
 
-          <button type="submit" form="file-upload-form" class="btn btn-primary">
+          <button
+            type="submit"
+            form="file-upload-form"
+            class="btn btn-primary"
+            id="file-upload-button"
+          >
             Upload file +
           </button>
         </div>
@@ -165,16 +170,20 @@
             </thead>
             <tbody>
               <tr th:each="file:${files}">
-                <td th:text="${file}">ExampleFile.txt</td>
+                <td th:text="${file}" th:id="'uploaded-filename-'+${file}">
+                  ExampleFile.txt
+                </td>
                 <td>
                   <a
                     class="btn btn-outline-success"
                     th:href="@{'files/'+${file}}"
+                    th:id="'uploaded-file-view-button-'+${file}"
                     >View</a
                   >
                   <a
                     class="btn btn-outline-danger"
                     th:href="@{'files/delete/'+${file}}"
+                    th:id="'uploaded-file-delete-button-'+${file}"
                     >Delete</a
                   >
                 </td>
