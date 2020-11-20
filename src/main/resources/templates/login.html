@@ -42,6 +42,13 @@
         >
           You have been logged out
         </div>
+        <div
+          class="alert alert-dark"
+          th:if="${signupSuccess}"
+          id="alert-successful-signup"
+        >
+          You successfully signed up! Let's try to login.
+        </div>
         <div class="form-group">
           <label for="inputUsername">Username</label>
           <input
