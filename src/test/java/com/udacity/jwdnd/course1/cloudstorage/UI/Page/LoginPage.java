@@ -22,6 +22,9 @@ public class LoginPage {
     @FindBy(id="alert-successful-logout")
     private WebElement alertSuccessfulLogout;
 
+    @FindBy(id="alert-successful-signup")
+    private WebElement alertSuccessfulSignup;
+
     public LoginPage(WebDriver driver) {
         PageFactory.initElements(driver, this);
     }
@@ -30,6 +33,10 @@ public class LoginPage {
         inputUsername.sendKeys(username);
         inputPassword.sendKeys(password);
         buttonLogin.click();
+    }
+
+    public String getAlertSuccessfulSignupText(){
+        return alertSuccessfulSignup.getText();
     }
 
     public String getAlertSuccessfulLogoutText(){

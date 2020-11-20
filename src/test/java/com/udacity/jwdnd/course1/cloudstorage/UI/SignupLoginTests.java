@@ -42,54 +42,55 @@ public class SignupLoginTests {
 
     @Test
     @Order(1)
-    public void testRegisterUserAndLoginSuccess() {
+    public void testRegisterUserAndLoginSuccess() throws InterruptedException {
         String firstname = "Antonio";
         String lastname = "Moore";
         String username = "antoniomoore";
         String password = "brad";
 
-        String alertSuccessfulSignupText = "You successfully signed up! Please continue to the login page.";
+        String alertSuccessfulSignupText = "You successfully signed up! Let's try to login.";
 
         driver.get(baseURL + "/signup");
 
         SignupPage signupPage = new SignupPage(driver);
         signupPage.registerUser(firstname,lastname,username, password);
 
-        assertEquals(alertSuccessfulSignupText,signupPage.getAlertSuccessfulSignupText());
-
-        driver.get(baseURL + "/login");
-
         LoginPage loginPage = new LoginPage(driver);
+
+        assertEquals(baseURL + "/login",driver.getCurrentUrl());
+        assertEquals(alertSuccessfulSignupText,loginPage.getAlertSuccessfulSignupText());
+
+        Thread.sleep(1000);
         loginPage.login(username, password);
 
-        assertEquals(driver.getCurrentUrl(),baseURL+"/");
+        assertEquals(baseURL + "/",driver.getCurrentUrl());
     }
 
     @Test
     @Order(2)
-    public void testRegisterUserWithDuplicatedFirstnameLastnameAndLoginSuccess() {
+    public void testRegisterUserWithDuplicatedFirstnameLastnameAndLoginSuccess() throws InterruptedException {
         String firstname = "Antonio";
         String lastname = "Moore";
         String usernameNew = "antonio.moore.1";
         String password = "brad";
 
-        String alertSuccessfulSignupText = "You successfully signed up! Please continue to the login page.";
+        String alertSuccessfulSignupText = "You successfully signed up! Let's try to login.";
 
         driver.get(baseURL + "/signup");
 
         SignupPage signupPage = new SignupPage(driver);
         signupPage.registerUser(firstname,lastname,usernameNew, password);
 
-        assertEquals(alertSuccessfulSignupText,signupPage.getAlertSuccessfulSignupText());
-
-        driver.get(baseURL + "/login");
-
         LoginPage loginPage = new LoginPage(driver);
+
+        assertEquals(baseURL + "/login",driver.getCurrentUrl());
+        assertEquals(alertSuccessfulSignupText,loginPage.getAlertSuccessfulSignupText());
+
+        Thread.sleep(1000);
         loginPage.login(usernameNew, password);
 
-        assertEquals(driver.getCurrentUrl(),baseURL+"/");
+        assertEquals(baseURL + "/",driver.getCurrentUrl());
     }
-
 
     @Test
     @Order(3)
@@ -155,7 +156,7 @@ public class SignupLoginTests {
         driver.get(baseURL + "/");
 
         //verify that user is redirected to login page
-        assertEquals(driver.getCurrentUrl(),baseURL+"/login");
+        assertEquals(baseURL+"/login",driver.getCurrentUrl());
     }
 
     @Test
@@ -169,12 +170,12 @@ public class SignupLoginTests {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.login(username,password);
 
-        assertEquals(driver.getCurrentUrl(),baseURL+"/");
+        assertEquals(baseURL+"/",driver.getCurrentUrl());
 
         driver.get(baseURL + "/logout");
 
         //verify that user will be redirected to login page after logout
-        assertEquals(driver.getCurrentUrl(),baseURL+"/login?logout");
+        assertEquals(baseURL+"/login?logout", driver.getCurrentUrl());
 
         String alertSuccessfulLogout = "You have been logged out";
 
@@ -183,7 +184,7 @@ public class SignupLoginTests {
         driver.get(baseURL + "/");
 
         //verify that user will be redirected to login page when trying to access home page without logging in
-        assertEquals(driver.getCurrentUrl(),baseURL+"/login");
+        assertEquals(baseURL+"/login",driver.getCurrentUrl());
 
     }
 

@@ -25,9 +25,6 @@ public class SignupPage {
     @FindBy(id="linkBackToLogin")
     private WebElement linkBackToLogin;
 
-    @FindBy(id="alert-successful-signup")
-    private WebElement alertSuccessfulSignup;
-
     @FindBy(id="alert-error-signup")
     private WebElement alertErrorSignup;
 
@@ -41,10 +38,6 @@ public class SignupPage {
         inputUsername.sendKeys(username);
         inputPassword.sendKeys(password);
         buttonSignup.click();
-    }
-
-    public String getAlertSuccessfulSignupText(){
-        return alertSuccessfulSignup.getText();
     }
 
     public String getAlertErrorSignupText(){
