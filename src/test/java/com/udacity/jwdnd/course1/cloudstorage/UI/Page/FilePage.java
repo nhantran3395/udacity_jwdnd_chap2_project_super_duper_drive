@@ -74,7 +74,7 @@ public class FilePage {
         return alertErrorFileStorageFailure.getText();
     }
 
-    public boolean checkIfAlertErrorFileSizeLimitExceeded(){
+    public boolean checkIfAlertErrorFileSizeLimitExceededIsDisplayed(){
         return alertErrorFileSizeLimitExceeded.isDisplayed();
     }
 

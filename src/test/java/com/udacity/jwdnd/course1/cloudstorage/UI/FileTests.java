@@ -121,8 +121,8 @@ public class FileTests {
         String username = "marcianichols4792";
         String password = "mason1";
 
-        String filePathExceedLimitFile = "D:\\Back_end\\Java\\udacity_jwdnd_super_duper_drive\\file_upload_test_data\\heavy_carrot.jpg";
-        String fileNameExceedLimitFile = "heavy_carrot.jpg";
+        String filePathExceedLimitFile = "D:\\Back_end\\Java\\udacity_jwdnd_super_duper_drive\\file_upload_test_data\\video.mp4";
+        String fileNameExceedLimitFile = "video.mp4";
 
         String alertErrorFileSizeLimitExceeded = "Oops! Something went wrong and we could not get the file from storage. Please try again.\n"
                 +"Cause: Maximum upload size exceeded\n×";
@@ -138,7 +138,7 @@ public class FileTests {
 
         filePage.uploadFile(filePathExceedLimitFile);
 
-        assertTrue(filePage.checkIfAlertErrorFileSizeLimitExceeded());
+        assertTrue(filePage.checkIfAlertErrorFileSizeLimitExceededIsDisplayed());
         assertEquals(alertErrorFileSizeLimitExceeded,filePage.getAlertErrorFileSizeLimitExceededText());
 
         assertThrows(NoSuchElementException.class,()->filePage.getUploadFilenameSizeLimitExceeded());
