@@ -2,7 +2,6 @@ package com.udacity.jwdnd.course1.cloudstorage.UI;
 
 import com.udacity.jwdnd.course1.cloudstorage.UI.Page.CredentialPage;
 import com.udacity.jwdnd.course1.cloudstorage.UI.Page.LoginPage;
-import com.udacity.jwdnd.course1.cloudstorage.UI.Page.NotePage;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.NoSuchElementException;

@@ -94,7 +94,6 @@ public class FileTests {
         String password = "mason1";
 
         String filePathEmptyFile = "D:\\Back_end\\Java\\udacity_jwdnd_super_duper_drive\\file_upload_test_data\\empty.txt";
-        String fileNameEmptyFile = "empty.txt";
 
         String alertErrorFileStorageFailure = "Oops! Something went wrong and we could not store the file. Please try again.\n"
                 +"Cause: Failed to store empty file empty.txt\n×";
@@ -122,7 +121,6 @@ public class FileTests {
         String password = "mason1";
 
         String filePathExceedLimitFile = "D:\\Back_end\\Java\\udacity_jwdnd_super_duper_drive\\file_upload_test_data\\video.mp4";
-        String fileNameExceedLimitFile = "video.mp4";
 
         String alertErrorFileSizeLimitExceeded = "Oops! Something went wrong and we could not get the file from storage. Please try again.\n"
                 +"Cause: Maximum upload size exceeded\n×";
