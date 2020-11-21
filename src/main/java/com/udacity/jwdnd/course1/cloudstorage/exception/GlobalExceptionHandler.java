@@ -1,7 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage.exception;
 
 import com.udacity.jwdnd.course1.cloudstorage.util.SetQueryParamsForOpeningAlertUtil;
-import org.apache.tomcat.util.http.fileupload.impl.SizeLimitExceededException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ControllerAdvice;

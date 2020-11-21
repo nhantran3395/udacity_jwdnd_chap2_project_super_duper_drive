@@ -1,6 +1,5 @@
 package com.udacity.jwdnd.course1.cloudstorage.UI.Page;
 
-import com.udacity.jwdnd.course1.cloudstorage.UI.Page.PageUtil.PageUtil;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -8,10 +7,7 @@ import org.openqa.selenium.support.PageFactory;
 
 public class FilePage {
 
-    private PageUtil pageUtil;
-
     public FilePage(WebDriver driver) {
-        this.pageUtil = new PageUtil(driver);
         PageFactory.initElements(driver, this);
     }
 
