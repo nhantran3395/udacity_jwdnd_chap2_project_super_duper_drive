@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{layout}"
+>
+  <head>
+    <title>Super Duper Drive | Page Not Found</title>
+  </head>
+
+  <body>
+    <div layout:fragment="content">
+      <div class="container d-flex flex-column mb-5">
+        <div class="jumbotron bg-white">
+          <h1>
+            Opps! The page you looking for is not available at the moment.
+          </h1>
+          <h2 class="lead mb-5">Please try to access other pages.</h2>
+          <a th:href="@{/}">Let's take you back to homepage first &#8594;</a>
+        </div>
+        <!-- jumbotron -->
+      </div>
+      <!-- container -->
+    </div>
+    <!-- layout:fragment -->
+  </body>
+</html>
